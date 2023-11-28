@@ -1,4 +1,10 @@
 /* styles.css */
+body {
+	background-image: url('../img/knu_museum.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 .container {
     width: 100%;
     height: 100%;
