@@ -32,6 +32,7 @@ body {
 .menu-container {
     display: flex;
     align-items: center;
+    margin-left: 30px;
 }
 
 .menu-item {
@@ -43,39 +44,18 @@ body {
     text-decoration: underline;
     letter-spacing: 0.72px;
     word-wrap: break-word;
+    margin-left: 20px;
 }
 
-.login_signup{
-	width: 214px; 
-	height: 31.50px; 
-	position: relative;
-}
-
-.login {
-	width: 71.68px; 
-	left: 0px; 
-	top: 0.50px; 
-	position: absolute; 
-	color: white; 
-	font-size: 20px; 
-	font-family: DM Sans; 
-	font-weight: 500; 
-	text-decoration: underline; 
-	letter-spacing: 0.72px; 
-	word-wrap: break-word;
-}
-
-.signup{
-	 width: 95.93px; 
-	 left: 118.07px; 
-	 top: 0px; 
-	 position: absolute; 
-	 color: white; 
-	 font-size: 20px; 
-	 font-family: DM Sans; 
-	 font-weight: 500; 
-	 text-decoration: underline; 
-	 letter-spacing: 0.72px; 
-	 word-wrap: break-word;
+.my-page {
+    width: 120px;
+    color: white;
+    font-size: 24px;
+    font-family: DM Sans;
+    font-weight: 500;
+    text-decoration: underline;
+    letter-spacing: 0.72px;
+    word-wrap: break-word;
+    margin-left: auto;
 }
  
