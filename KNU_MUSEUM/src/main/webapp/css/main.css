@@ -1,11 +1,38 @@
-/* styles.css */
+/* main.css */
 body {
 	background-image: url('../img/knu_museum.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
 }
 
+.info {
+	background-color: white;
+	background-position: center;
+	opacity: 0.8;
+	margin: 50px;
+	border-radius: 15px;
+	overflow: hidden;
+	text-align: center;
+}
 
+.info h3 {
+	text-align: center;
+	margin-top: 20px;
+}
 
- 
+.info iframe {
+	border: 0;
+}
+
+.info table {
+	margin: 0 auto;
+	border-collapse: collapse;
+	border: 1px solid #ddd;
+	margin-bottom: 20px;
+}
+
+.info th, .info td {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
