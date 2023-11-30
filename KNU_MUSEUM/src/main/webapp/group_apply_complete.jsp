@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page language="java"
-	import="java.text.*, java.sql.*, java.time.LocalDate"%>
+	import="java.text.*, java.sql.*, java.time.LocalDate, java.util.ArrayList, java.util.List, java.util.Random"%>
 <%@ page import="common.Person"%>
 <!DOCTYPE html>
 <html>
@@ -38,67 +38,43 @@
 
 	String UserID = (String) session.getAttribute("UserID");
 
-	String CeduID = request.getParameter("program");
+	String GAppDate = request.getParameter("selectedDate");
+	String GAppTime = request.getParameter("time");
 	String ApplyNum = request.getParameter("num");
-	String MAppDate = request.getParameter("selectedDate");
-	String MAppTimeS = request.getParameter("time");
 	String CuserID = UserID;
-	String title = "";
+	String CadminID;
 
-	// CeduID 설정
-	if (request.getSession().getAttribute("selectedEduID") != null) {
-		CeduID = (String) request.getSession().getAttribute("selectedEduID");
+	// grouptourID 설정
+	String maxGroupTourIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(GroupTourID, 10))) AS MaxGroupTourID FROM GROUP_TOUR_APPLICATION";
+	ResultSet maxGroupTourIDResultSet = stmt.executeQuery(maxGroupTourIDQuery);
+	maxGroupTourIDResultSet.next();
+	int maxGroupTourIDNumber = maxGroupTourIDResultSet.getInt(1);
+	int newGroupTourIDNumber = maxGroupTourIDNumber + 1;
+	String newGroupTourID = "grouptour" + newGroupTourIDNumber;
+	maxGroupTourIDResultSet.close();
+
+	// 랜덤으로 adminID 가져오기
+	String adminIDQuery = "SELECT AdminID FROM ADMIN";
+	ResultSet CadminIDResultSet = stmt.executeQuery(adminIDQuery);
+	List<String> adminIDList = new ArrayList<>();
+	while (CadminIDResultSet.next()) {
+		adminIDList.add(CadminIDResultSet.getString(1));
 	}
+	Random random = new Random();
+	CadminID = adminIDList.get(random.nextInt(adminIDList.size()));
+	CadminIDResultSet.close();
 
-	// ApplyID 설정
-	String maxApplyIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(ApplyID, 6))) AS MaxApplyID FROM MUSEUM_PROGRAM_APPLICATION";
-	ResultSet maxApplyIDResultSet = stmt.executeQuery(maxApplyIDQuery);
-	maxApplyIDResultSet.next();
-	int maxApplyIDNumber = maxApplyIDResultSet.getInt(1);
-	int newApplyIDNumber = maxApplyIDNumber + 1;
-	String newApplyID = "apply" + newApplyIDNumber;
-	maxApplyIDResultSet.close();
+	String sql = "INSERT INTO GROUP_TOUR_APPLICATION (GroupTourID, GAppDate, GAppTime, ApplyNum, Status, CuserID, CadminID) VALUES (?, TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?, ?, ?)";
+	pstmt = conn.prepareStatement(sql);
+	pstmt.setString(1, newGroupTourID);
+	pstmt.setString(2, GAppDate);
+	pstmt.setInt(3, Integer.parseInt(GAppTime));
+	pstmt.setInt(4, Integer.parseInt(ApplyNum));
+	pstmt.setInt(5, 0); // Status = 0
+	pstmt.setString(6, CuserID);
+	pstmt.setString(7, CadminID);
 
-	// 해당 프로그램에 맞는 CadminID 가져오기
-	String sql2 = "SELECT MadminID FROM MUSEUM_PROGRAM_LIST WHERE EduID = ?";
-	PreparedStatement pstmt3 = conn.prepareStatement(sql2);
-	pstmt3.setString(1, CeduID);
-	ResultSet adminIDResultSet = pstmt3.executeQuery();
-	String CadminID = null;
-	if (adminIDResultSet.next()) {
-		CadminID = adminIDResultSet.getString(1);
-	} else {
-		// Handle the case when no matching EduID is found
-		out.println("No matching EduID found in the museum_program_list table.");
-	}
-	pstmt3.close();
-	adminIDResultSet.close();
-
-	String sql = "INSERT INTO MUSEUM_PROGRAM_APPLICATION (ApplyID, ApplyNum, MAppDate, MAppTime, Status, CeduID, CuserID, CadminID) VALUES (?, ?, TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?, ?, ?)";
-	PreparedStatement pstmt2 = conn.prepareStatement(sql);
-	pstmt2.setString(1, newApplyID);
-	pstmt2.setInt(2, Integer.parseInt(ApplyNum));
-	pstmt2.setString(3, MAppDate);
-	pstmt2.setInt(4, Integer.parseInt(MAppTimeS));
-	pstmt2.setInt(5, 0); // Status = 0
-	pstmt2.setString(6, CeduID);
-	pstmt2.setString(7, CuserID);
-	pstmt2.setString(8, CadminID);
-
-	int res = pstmt2.executeUpdate();
-	pstmt2.close();
-
-	String sql1 = "select title from museum_program_list where eduid = ?";
-	PreparedStatement pstmt1 = conn.prepareStatement(sql1);
-	pstmt1.setString(1, CeduID);
-	ResultSet rs1 = pstmt1.executeQuery();
-	if (rs1.next()) {
-		title = rs1.getString(1);
-	} else {
-		out.println("No matching title found in the museum_program_list table.");
-	}
-	pstmt1.close();
-	rs1.close();
+	pstmt.close();
 	%>
 
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -135,7 +111,6 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">프로그램 제목</th>
 					<th scope="col">신청 날짜</th>
 					<th scope="col">신청 시간</th>
 					<th scope="col">신청 인원</th>
@@ -143,9 +118,8 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><%=title%></td>
-					<td><%=MAppDate%></td>
-					<td><%=MAppTimeS%></td>
+					<td><%=GAppDate%></td>
+					<td><%=GAppTime%></td>
 					<td><%=ApplyNum%></td>
 				</tr>
 			</tbody>

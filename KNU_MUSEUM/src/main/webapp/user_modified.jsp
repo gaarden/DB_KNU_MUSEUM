@@ -16,7 +16,8 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<%
+
+<%
 	String serverIP = "localhost";
 	//String strSID = "xe";
 	String strSID = "orcl";
@@ -27,16 +28,46 @@
 	Connection conn = null;
 	PreparedStatement pstmt;
 	ResultSet rs;
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	conn = DriverManager.getConnection(url, user, pass);
+	
+
 	
 	request.setCharacterEncoding("utf-8");
+	int updateResult = 0;
+	
+	try {
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        conn = DriverManager.getConnection(url, user, pass);
 
-	String UserID = (String) session.getAttribute("UserID");
+        String UserID = (String) session.getAttribute("UserID");
+        String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String PNumber = request.getParameter("PNumber");
+
+        String query = "UPDATE USERS SET Password = '"+password+"', Name = '"+ name + "' , Email = '"+email+ "' , PNumber = '"+PNumber+"' WHERE UserID = '"+UserID+"'";
+        pstmt = conn.prepareStatement(query);
+   
+
+        updateResult = pstmt.executeUpdate();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+	
+	
+	
 	
 	%>
-
-	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+	
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="main.html"> <img
 				src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24"
@@ -60,42 +91,21 @@
 			</div>
 		</div>
 	</nav>
-	<ul class="nav nav-underline justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="user_view.jsp">신청내역조회</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="user_modify_info.jsp">개인정보수정</a>
-  </li>
-</ul>
-<div class="info">
-<form class="row g-3" action="user_modified.jsp" method="post">
-	<div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon1" >@</span>
-    <span class="form-control" aria-label="Username" aria-describedby="basic-addon1"><%= UserID %></span>
-</div>
 
-<div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">@</span>
-  <input type="text" class="form-control"  name="password" placeholder="비밀번호" aria-label="Recipient's username" aria-describedby="basic-addon2">
-</div>
-
-<div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">@</span>
-  <input type="text" class="form-control" name="name" placeholder="이름" aria-label="Recipient's username" aria-describedby="basic-addon2">
-</div>
-
-<div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">@</span>
-  <input type="text" class="form-control" name="email" placeholder="이메일" aria-label="Recipient's username" aria-describedby="basic-addon2">
-</div>
-
-<div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">@</span>
-  <input type="text" class="form-control" name="PNumber" placeholder="전화번호" aria-label="Recipient's username" aria-describedby="basic-addon2">
-</div>
-<button type="submit" class="btn btn-secondary">제출</button>
-</form>
+<div class="result-container">
+    <h2 class="text-center mb-4">개인정보 수정 결과</h2>
+    <%
+        if (updateResult > 0) {
+    %>
+    <p class="success-message">개인정보가 성공적으로 수정되었습니다.</p>
+    <%
+        } else {
+    %>
+    <p class="error-message">개인정보 수정에 실패했습니다. 다시 시도해주세요.</p>
+    <%
+        }
+    %>
+    <a href="user_view.jsp">신청내역조회로 돌아가기</a>
 </div>
 
 </body>
