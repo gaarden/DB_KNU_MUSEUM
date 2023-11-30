@@ -19,7 +19,7 @@
 	<%
 	String serverIP = "localhost";
 	//String strSID = "xe";
-	//String strSID = "orcl";
+	String strSID = "orcl";
 	String portNum = "1521";
 	String user = "KNU_MUSEUM";
 	String pass = "comp322";
@@ -108,12 +108,12 @@
 		while (rs.next()) {
 			out.println("<div class=\"element\">");
 			out.println("<br>");
-			String title = rs.getString("title");
+			String title = rs.getString(1);
 			title = title.replace("<", "&lt;").replace(">", "&gt;");
 			out.println("<h4>" + title + "</h4>");
-			out.println("<p>* 진행 기간: " + rs.getString("startdate") + "~" + rs.getString("enddate") + "</p>");
-			out.println("<p>* 소요 시간: " + rs.getString("ptime") + "</p>");
-			out.println("<p>* 제한 인원: " + rs.getString("limitnum") + "</p>");
+			out.println("<p>* 진행 기간: " + rs.getString(2) + "~" + rs.getString(3) + "</p>");
+			out.println("<p>* 소요 시간: " + rs.getString(4) + "</p>");
+			out.println("<p>* 제한 인원: " + rs.getString(5) + "</p>");
 			out.println("<br>");
 			out.println("</div>");
 		}
