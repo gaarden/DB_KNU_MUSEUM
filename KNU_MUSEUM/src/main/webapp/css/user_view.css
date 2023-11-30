@@ -1,0 +1,24 @@
+/* styles.css */
+body {
+	background-image: url('../img/knu_museum.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.table-responsive{
+  background-color: var(--bs-body-color);
+  color: var(--bs-secondary-bg);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 1rem;
+}
+
+.table-responsive p{
+  font-size: 2rem;
+}
+
+div button{
+	 background-color: var(--bs-body-color);
+     color: var(--bs-secondary-bg);
+}
