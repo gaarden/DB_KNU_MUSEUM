@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+body {
+	background-image: url('../img/knu_museum.png');
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+}
+
+.box {
+	background-color: white;
+	background-position: center;
+	margin: 50px;
+	border-radius: 15px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.box h3, .box h4 {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.box selected {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.box input[type="submit"] {
+	background-color: #994D1C;
+    border-radius: 15px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: white;
+}
+
+.box input[type="text"] {
+	width: 50%;
+	border: 1px solid #bbb;
+	border-radius: 8px;
+	padding: 10px 12px;
+	font-size: 14px;
+	margin: 20px;
+}
+
+.box input[type="radio"] {
+	margin: 20px;
+}
+
+.element {
+	background-color: #F5CCA0;
+	border-radius: 15px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin: 50px;
+	opacity: 0.8;
+	color: black;
+}
