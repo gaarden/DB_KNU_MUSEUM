@@ -1,0 +1,17 @@
+/* main.css */
+body {
+	background-image: url('../img/knu_museum.png');
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+}
+
+.info {
+	background-color: white;
+	background-position: center;
+	margin: 50px;
+	padding: 20px;
+	border-radius: 15px;
+	text-align: center;
+	color: black;
+}

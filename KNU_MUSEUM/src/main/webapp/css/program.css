@@ -1,4 +1,5 @@
-/* main.css */
+@charset "UTF-8";
+
 body {
 	background-image: url('../img/knu_museum.png');
 	background-size: cover;
@@ -6,39 +7,7 @@ body {
 	background-attachment: fixed;
 }
 
-.info {
-	background-color: white;
-	background-position: center;
-	opacity: 0.8;
-	margin: 50px;
-	border-radius: 15px;
-	overflow: hidden;
-	text-align: center;
-	color: black;
-}
-
-.info h3 {
-	text-align: center;
-	margin-top: 20px;
-}
-
-.info iframe {
-	border: 0;
-}
-
-.info table {
-	margin: 0 auto;
-	border-collapse: collapse;
-	border: 1px solid #ddd;
-	margin-bottom: 20px;
-}
-
-.info th, .info td {
-	border: 1px solid #ddd;
-	padding: 8px;
-}
-
-.artifact {
+.box {
 	background-color: white;
 	background-position: center;
 	margin: 50px;
@@ -47,22 +16,35 @@ body {
 	text-align: center;
 }
 
-.artifact h3, .artifact h4 {
+.box h3, .box h4 {
 	text-align: center;
 	margin-top: 20px;
 }
 
-.artifact selected {
+.box selected {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
 
-.artifact input, .artifact button {
+.box input[type="submit"] {
 	background-color: #994D1C;
     border-radius: 15px;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	color: white;
+}
+
+.box input[type="text"] {
+	width: 50%;
+	border: 1px solid #bbb;
+	border-radius: 8px;
+	padding: 10px 12px;
+	font-size: 14px;
+	margin: 20px;
+}
+
+.box input[type="radio"] {
+	margin: 20px;
 }
 
 .element {

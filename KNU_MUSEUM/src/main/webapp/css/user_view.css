@@ -7,7 +7,7 @@ body {
 }
 
 .table-responsive{
-  background-color: var(--bs-body-color);
+  background-color: var(--bs-tertiary-bg);
   color: var(--bs-secondary-bg);
   padding: 1rem;
   margin: 1rem;
@@ -16,9 +16,13 @@ body {
 
 .table-responsive p{
   font-size: 2rem;
+  color: black;
 }
 
 div button{
-	 background-color: var(--bs-body-color);
-     color: var(--bs-secondary-bg);
+	 background-color: var(--bs-warning-bg-subtle);
+     color: var(--bs-body-color);
+     border: none;
+     border-radius: 25%;
+     size: 2rem;
 }
