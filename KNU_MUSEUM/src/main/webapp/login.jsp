@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page language="java" import="java.text.*, java.sql.*"%>
+<%@ page import="common.Person"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,6 +74,8 @@
 	int loginState = 0;
 
 	String selectedValue = request.getParameter("select");
+	
+	
 
 	// 가져온 값에 따라 다른 처리 수행
 	if ("user".equals(selectedValue)) {
@@ -123,21 +126,23 @@
 		if (loginState == 1 ) {
 
 			if ("user".equals(selectedValue)) {
+				session.setAttribute("UserID",request.getParameter("id"));
 		%>
 
 		<script>
 			// JavaScript를 사용하여 리다이렉트
-			window.location.href = "user_login.html";
+			window.location.href = "user_login.jsp";
 		</script>
 
 
 		<%
 		} else if ("admin".equals(selectedValue)) {
+			session.setAttribute("AdminID",request.getParameter("id"));
 		%>
 
 		<script>
 			// JavaScript를 사용하여 리다이렉트
-			window.location.href = "admin_login.html";
+			window.location.href = "admin_login.jsp";
 		</script>
 
 		<%

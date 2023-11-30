@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page language="java" import="java.text.*, java.sql.*"%>
+<%@ page import="common.Person"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +29,8 @@
 	ResultSet rs;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
+	
+	String AdminID = (String) session.getAttribute("AdminID");
 	%>
 
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -39,7 +42,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">이용안내</a></li>
+						aria-current="page" href="info.html">이용안내</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="#">유물관리</a></li>
 					<li class="nav-item"><a class="nav-link active"
