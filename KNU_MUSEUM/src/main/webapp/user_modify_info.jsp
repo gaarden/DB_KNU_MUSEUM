@@ -88,7 +88,7 @@
   <span class="input-group-text" id="basic-addon1">@</span>
   <input type="text" class="form-control" placeholder="전화번호" aria-label="Recipient's username" aria-describedby="basic-addon2">
 </div>
-<input type="submit">
+<button type="button" class="btn btn-secondary">제출</button>
 </form>
 </div>
 </body>
