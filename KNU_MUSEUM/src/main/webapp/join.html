@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>KNU_MUSEUM_DB</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+	<style>
+		.form-container {
+			background: white;
+			padding: 40px 20px; /* Adjust the top and bottom padding as needed */
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			max-width: 400px;
+			/* Adjust the value as needed */
+			margin: auto;
+			/* To center the container horizontally */
+		}
+	</style>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">
+				<img src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24"
+					class="d-inline-block align-text-top">
+			</a>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="http://localhost:8080/KNU_MUSEUM/info.html">이용안내</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="http://localhost:8080/KNU_MUSEUM/artifact.html">소장유물</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="http://localhost:8080/KNU_MUSEUM/program.html">체험프로그램</a>
+					</li>
+				</ul>
+				<span class="navbar-text">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link" href="http://localhost:8080/KNU_MUSEUM/login.html">로그인</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="http://localhost:8080/KNU_MUSEUM/join.html">회원가입</a>
+						</li>
+					</ul>
+				</span>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="form-container">
+		<form class="row g-3">
+			<div class="col-12">
+				<input type="text" class="form-control" id="id" placeholder="아이디를 입력해 주세요">
+			</div>
+			<div class="col-12">
+				<input type="text" class="form-control" id="password" placeholder="비밀번호를 입력해 주세요">
+			</div>
+			<div class="col-12">
+				<input type="text" class="form-control" id="name" placeholder="이름을 입력해 주세요">
+			</div>
+			
+			<div class="col-12">
+				<input type="text" class="form-control" id="emaim" placeholder="이메일을 입력해 주세요">
+			</div>
+			<div class="col-12">
+				<input type="text" class="form-control" id="phonenumber" placeholder="휴대폰 번호를 '-'없이 입력해주세요.">
+			</div>
+			<div class="col-12">
+				<button type="submit" class="btn btn-primary">회원가입</button>
+			</div>
+		</form>
+	</div>
+
+</body>
+
+</html>
