@@ -17,7 +17,8 @@
 <body>
 	<%
 	String serverIP = "localhost";
-	String strSID = "xe";
+	//String strSID = "xe";
+	String strSID = "orcl";
 	String portNum = "1521";
 	String user = "KNU_MUSEUM";
 	String pass = "comp322";
@@ -129,8 +130,8 @@
 			out.println("<h4>" + rs.getString(2) + "</h4>");
 			out.println("<p style=\"margin: 20px;\">유물 설명: " + rs.getString(11) + "</p>");
 			out.println("<img src=\"Artifact_image/" + rs.getString(3) + ".png\" style=\"width:300px; margin-top:20px; margin-bottom:20px;\">");
-			out.println("<p>* 유물 위치: " + rs.getString("location") + "</p>");
-		    out.println("<p>* 유물 시대: " + rs.getString("era") + "</p>");
+			out.println("<p>* 유물 위치: " +  request.getParameter("location") + "</p>");
+		    out.println("<p>* 유물 시대: " +  request.getParameter("era") + "</p>");
 		    out.println("<br>");
 			out.println("</div>");
 		}
