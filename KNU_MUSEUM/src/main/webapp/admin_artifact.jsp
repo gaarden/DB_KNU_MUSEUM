@@ -8,7 +8,7 @@
 <head>
  <meta charset="UTF-8">
     <title>KNU_MUSEUM_DB</title>
-    <link rel="stylesheet" type="text/css" href="css/user_view.css">
+    <link rel="stylesheet" type="text/css" href="css/admin_artifact.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -64,63 +64,61 @@
 <br>
 <ul class="nav nav-underline justify-content-center">
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">신청내역조회</a>
+    <a class="nav-link active" aria-current="page" href="admin_artifact.jsp">유물 리스트</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">개인정보수정</a>
+    <a class="nav-link active" aria-current="page" href="artifact_add.jsp">유물 추가하기</a>
+  </li>
+   <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="artifact_edit.jsp">유물 편집하기</a>
+  </li>
+   <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="artifact_delete.jsp">유물 삭제하기</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="artifact_search.jsp">유물 조회하기</a>
   </li>
 </ul>
+
 <div class="table-responsive">
-	<p>--님의 체험 프로그램 신청내역</p>
+	<p>유물 리스트</p>
   <table class="table align-middle">   
     <thead class="table-warning">
       <tr>
-        <td>체험프로그램명</td>
-        <td>날짜</td>
-        <td>소요시간</td>
-        <td>신청인원</td>
-        <td>상태</td>
-        <td>신청취소</td>
+        <td>이름</td>
+        <td>사진</td>
+        <td>위치</td>
+        <td>분류</td>
+        <td>시대</td>
+        <td>관리자ID</td>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td><button>취소</button></td>
-      </tr>
-    </tbody>
+<%
+	String query = new String();
+	PreparedStatement pstmt;
+	ResultSet rs;
+	query = "Select Artname, Image, Location, Class, Era, MadminID From Artifact";
+	pstmt = conn.prepareStatement(query);
+	rs = pstmt.executeQuery();
+	out.println("<tbody>");
+	while(rs.next()){
+		out.println("<tr>");
+		out.println("<td>" + rs.getString(1) + "</td>");
+		out.println("<td>" + rs.getString(2) + "</td>");
+		out.println("<td>" + rs.getString(3) + "</td>");
+		out.println("<td>" + rs.getString(4) + "</td>");
+		out.println("<td>" + rs.getString(5) + "</td>");
+		out.println("<td>" + rs.getString(6) + "</td>");
+		out.println("</tr>");		
+	}
+%>
   </table>
 </div>
 <br>
-<div class="table-responsive">
-	<p>--님의 단체 관람 신청내역</p>
-  <table class="table align-middle">   
-    <thead class="table-warning">
-      <tr>
-        <td>체험프로그램명</td>
-        <td>날짜</td>
-        <td>소요시간</td>
-        <td>신청인원</td>
-        <td>상태</td>
-        <td>신청취소</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td><button>취소</button></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
+<%
+	rs.close();
+	pstmt.close();
+	conn.close();
+%>
 </body>
 </html>
