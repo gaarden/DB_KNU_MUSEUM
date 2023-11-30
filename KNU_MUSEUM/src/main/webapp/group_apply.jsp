@@ -14,7 +14,6 @@
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
-
 <%!public String getTomorrow() {
 		LocalDate tomorrow = LocalDate.now().plusDays(1);
 		return tomorrow.toString();
@@ -54,7 +53,6 @@
 			<h3>* 단체 관람 시작은 오전 9시입니다.</h3>
 			<h3>* 관람 시간은 최대 10시간입니다.</h3>
 			<h3>* 단체 관람은 8명 이상부터 신청 가능합니다. (최대 100명)</h3>
-
 			<div class="date-container">
 				<label for="selectedDate">날짜:</label> <input type="date"
 					id="selectedDate" name="selectedDate" style="margin: 10px;"
@@ -62,7 +60,6 @@
 					시간:</label> <input type="text" name="time" style="width: 50px;"> <label
 					for="selectedDate">시간</label>
 			</div>
-
 			<div class="date-container">
 				<label for="selectedDate">신청 인원:</label> <input type="text"
 					name="num" style="width: 50px;"> <label for="selectedDate">명</label>

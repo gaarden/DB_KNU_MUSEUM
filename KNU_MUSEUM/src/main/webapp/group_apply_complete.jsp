@@ -29,7 +29,6 @@
 	PreparedStatement pstmt = null;
 	ResultSet rs;
 	Statement stmt = null;
-
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
 	stmt = conn.createStatement();
@@ -43,7 +42,6 @@
 	String ApplyNum = request.getParameter("num");
 	String CuserID = UserID;
 	String CadminID;
-
 	// grouptourID 설정
 	String maxGroupTourIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(GroupTourID, 10))) AS MaxGroupTourID FROM GROUP_TOUR_APPLICATION";
 	ResultSet maxGroupTourIDResultSet = stmt.executeQuery(maxGroupTourIDQuery);
@@ -63,7 +61,6 @@
 	Random random = new Random();
 	CadminID = adminIDList.get(random.nextInt(adminIDList.size()));
 	CadminIDResultSet.close();
-
 	String sql = "INSERT INTO GROUP_TOUR_APPLICATION (GroupTourID, GAppDate, GAppTime, ApplyNum, Status, CuserID, CadminID) VALUES (?, TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?, ?, ?)";
 	pstmt = conn.prepareStatement(sql);
 	pstmt.setString(1, newGroupTourID);
@@ -73,7 +70,6 @@
 	pstmt.setInt(5, 0); // Status = 0
 	pstmt.setString(6, CuserID);
 	pstmt.setString(7, CadminID);
-
 	pstmt.close();
 	%>
 
@@ -124,7 +120,6 @@
 				</tr>
 			</tbody>
 		</table>
-
 	</div>
 
 
