@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page language="java"
 	import="java.text.*, java.sql.*, java.time.LocalDate"%>
+	<%@ page import="common.Person"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +19,8 @@
 <body>
 	<%
 	String serverIP = "localhost";
-	String strSID = "xe";
-	//String strSID = "orcl";
+	//String strSID = "xe";
+	String strSID = "orcl";
 	String portNum = "1521";
 	String user = "KNU_MUSEUM";
 	String pass = "comp322";
@@ -30,6 +31,9 @@
 
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
+
+
+	String UserID = (String) session.getAttribute("UserID");
 	%>
 
 
@@ -41,20 +45,21 @@
 			</a>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="info_for_user.jsp">이용안내</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="info.html">이용안내</a></li>
+						aria-current="page" href="artifact_for_user.jsp">소장유물</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="artifact.jsp">소장유물</a></li>
+						aria-current="page" href="program_for_user.jsp">체험프로그램</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="program.jsp">체험프로그램</a></li>
+						aria-current="page" href="program_apply.jsp">체험 프로그램 신청</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">체험프로그램 신청</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">단체관람 신청</a></li>
+						aria-current="page" href="group_apply.jsp">단체관람 신청</a></li>
 				</ul>
 				<span class="navbar-text">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link" href="#">My Page</a></li>
+						<li class="nav-item"><a class="nav-link" href="user_view.jsp">My
+								Page</a></li>
 					</ul>
 				</span>
 			</div>

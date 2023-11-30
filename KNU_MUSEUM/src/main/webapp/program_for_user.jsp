@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page language="java"
 	import="java.text.*, java.sql.*, java.time.LocalDate"%>
+<%@ page import="common.Person"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +30,10 @@
 	ResultSet rs;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
+
+	request.setCharacterEncoding("utf-8");
+
+	String UserID = (String) session.getAttribute("UserID");
 	%>
 
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -40,16 +45,20 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="info.html">이용안내</a></li>
+						aria-current="page" href="info_for_user.jsp">이용안내</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="artifact.jsp">소장유물</a></li>
+						aria-current="page" href="artifact_for_user.jsp">소장유물</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="program.jsp">체험프로그램</a></li>
+						aria-current="page" href="program_for_user.jsp">체험프로그램</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="program_apply.jsp">체험 프로그램 신청</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="group_apply.jsp">단체관람 신청</a></li>
 				</ul>
 				<span class="navbar-text">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link" href="login.html">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="join.html">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="user_view.jsp">
+								My Page</a></li>
 					</ul>
 				</span>
 			</div>
@@ -73,7 +82,7 @@
 
 		if (request.getParameter("keyword") == null | "".equals(request.getParameter("keyword"))) {
 			if ("0".equals(request.getParameter("chk_info")) | request.getParameter("chk_info") == null) {
-				query = "select Title, TO_CHAR(StartDate, 'YYYY-MM-DD') AS StartDate, TO_CHAR(EndDate, 'YYYY-MM-DD') AS EndDate, PTime, LimitNum " 
+				query = "select Title, TO_CHAR(StartDate, 'YYYY-MM-DD') AS StartDate, TO_CHAR(EndDate, 'YYYY-MM-DD') AS EndDate, PTime, LimitNum "
 				+ "from museum_program_list order by startdate desc";
 				pstmt = conn.prepareStatement(query);
 				rs = pstmt.executeQuery();
@@ -87,8 +96,9 @@
 			}
 		} else {
 			if ("0".equals(request.getParameter("chk_info")) | request.getParameter("chk_info") == null) {
-				query = "SELECT Title, TO_CHAR(StartDate, 'YYYY-MM-DD') AS StartDate, TO_CHAR(EndDate, 'YYYY-MM-DD') AS EndDate, PTime, LimitNum " 
-				+ "FROM MUSEUM_PROGRAM_LIST " + "WHERE Title LIKE '%" + request.getParameter("keyword") + "%' order by startdate desc";
+				query = "SELECT Title, TO_CHAR(StartDate, 'YYYY-MM-DD') AS StartDate, TO_CHAR(EndDate, 'YYYY-MM-DD') AS EndDate, PTime, LimitNum "
+				+ "FROM MUSEUM_PROGRAM_LIST " + "WHERE Title LIKE '%" + request.getParameter("keyword")
+				+ "%' order by startdate desc";
 				pstmt = conn.prepareStatement(query);
 				rs = pstmt.executeQuery();
 			} else {

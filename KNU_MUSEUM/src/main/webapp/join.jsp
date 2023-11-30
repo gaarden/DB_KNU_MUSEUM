@@ -45,7 +45,7 @@
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="artifact.jsp">소장유물</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="program.html">체험프로그램</a></li>
+						aria-current="page" href="program.jsp">체험프로그램</a></li>
 				</ul>
 				<span class="navbar-text">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">

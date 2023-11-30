@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page language="java"
-	import="java.text.*, java.sql.*, java.time.LocalDate, java.util.ArrayList, java.util.List, java.util.Random"%>
+	import="java.text.*, java.sql.*, java.time.LocalDate"%>
 <%@ page import="common.Person"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>KNU_MUSEUM</title>
-<link rel="stylesheet" type="text/css" href="css/program_apply.css">
+<link rel="stylesheet" type="text/css" href="css/info.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -17,6 +17,7 @@
 	crossorigin="anonymous">
 </head>
 <body>
+
 	<%
 	String serverIP = "localhost";
 	//String strSID = "xe";
@@ -28,49 +29,12 @@
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs;
-	Statement stmt = null;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
-	stmt = conn.createStatement();
 
 	request.setCharacterEncoding("utf-8");
 
 	String UserID = (String) session.getAttribute("UserID");
-
-	String GAppDate = request.getParameter("selectedDate");
-	String GAppTime = request.getParameter("time");
-	String ApplyNum = request.getParameter("num");
-	String CuserID = UserID;
-	String CadminID;
-	// grouptourID 설정
-	String maxGroupTourIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(GroupTourID, 10))) AS MaxGroupTourID FROM GROUP_TOUR_APPLICATION";
-	ResultSet maxGroupTourIDResultSet = stmt.executeQuery(maxGroupTourIDQuery);
-	maxGroupTourIDResultSet.next();
-	int maxGroupTourIDNumber = maxGroupTourIDResultSet.getInt(1);
-	int newGroupTourIDNumber = maxGroupTourIDNumber + 1;
-	String newGroupTourID = "grouptour" + newGroupTourIDNumber;
-	maxGroupTourIDResultSet.close();
-
-	// 랜덤으로 adminID 가져오기
-	String adminIDQuery = "SELECT AdminID FROM ADMIN";
-	ResultSet CadminIDResultSet = stmt.executeQuery(adminIDQuery);
-	List<String> adminIDList = new ArrayList<>();
-	while (CadminIDResultSet.next()) {
-		adminIDList.add(CadminIDResultSet.getString(1));
-	}
-	Random random = new Random();
-	CadminID = adminIDList.get(random.nextInt(adminIDList.size()));
-	CadminIDResultSet.close();
-	String sql = "INSERT INTO GROUP_TOUR_APPLICATION (GroupTourID, GAppDate, GAppTime, ApplyNum, Status, CuserID, CadminID) VALUES (?, TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?, ?, ?)";
-	pstmt = conn.prepareStatement(sql);
-	pstmt.setString(1, newGroupTourID);
-	pstmt.setString(2, GAppDate);
-	pstmt.setInt(3, Integer.parseInt(GAppTime));
-	pstmt.setInt(4, Integer.parseInt(ApplyNum));
-	pstmt.setInt(5, 0); // Status = 0
-	pstmt.setString(6, CuserID);
-	pstmt.setString(7, CadminID);
-	pstmt.close();
 	%>
 
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -102,26 +66,42 @@
 		</div>
 	</nav>
 
-	<div class="box">
-		<h2 style="margin-bottom: 20px;">신청이 완료되었습니다.</h2>
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">신청 날짜</th>
-					<th scope="col">신청 시간</th>
-					<th scope="col">신청 인원</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><%=GAppDate%></td>
-					<td><%=GAppTime%></td>
-					<td><%=ApplyNum%></td>
-				</tr>
-			</tbody>
+
+	<div class="info">
+		<h3>박물관 주소</h3>
+		<h3>대구광역시 북구 대학로 80 경북대학교 박물관</h3>
+		<div
+			style="display: flex; justify-content: center; align-items: center; margin: 20px;">
+			<iframe
+				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3232.386580561947!2d128.6120514849475!3d35.8885466235273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e19e87775b31%3A0x27c3575a3edd70e7!2z6rK967aB64yA7ZWZ6rWQIOuwleusvOq0gA!5e0!3m2!1sko!2skr!4v1701261575007!5m2!1sko!2skr"
+				width="600" height="450" allowfullscreen="" loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"> </iframe>
+		</div>
+
+		<!-- Table with 개관일 and 휴관일 -->
+		<table>
+			<tr>
+				<th>개관일</th>
+				<td>월~토요일</td>
+			</tr>
+			<tr>
+				<th>휴관일</th>
+				<td>일요일, 공휴일</td>
+			</tr>
+			<tr>
+				<th>개관시간</th>
+				<td>10:00~17:00 (16시 30분까지 입장)</td>
+			</tr>
+			<tr>
+				<th>입장료</th>
+				<td>무료</td>
+			</tr>
+			<tr>
+				<th>연락처</th>
+				<td>053)950-6537</td>
+			</tr>
 		</table>
 	</div>
-
 
 
 </body>
