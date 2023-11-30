@@ -40,7 +40,7 @@
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="info.html">이용안내</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="artifact.html">소장유물</a></li>
+						aria-current="page" href="artifact.jsp">소장유물</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="#">체험프로그램</a></li>
 				</ul>
@@ -53,14 +53,45 @@
 			</div>
 		</div>
 	</nav>
+	
+	<div class="artifact">
+		<form action="artifact.jsp" method="Post">
+		<h3>조건 검색</h3>
+		<h4>전시실 선택</h4>
+		<select name="location">
+			<option value="0" selected>전체</option>
+			<option value="제1전시실">제1전시실</option>
+			<option value="제2전시실">제2전시실</option>
+			<option value="제3전시실">제3전시실</option>
+			<option value="제4전시실">제4전시실</option>
+			<option value="제5전시실">제5전시실</option>
+		</select>
+		<h4>시대 선택</h4>
+		<select name="era">
+			<option value="0" selected>전체</option>
+			<option value="구석기시대">구석기시대</option>
+			<option value="신석기시대">신석기시대</option>
+			<option value="청동기시대">청동기시대</option>
+			<option value="철기시대">철기시대</option>
+			<option value="삼국시대">삼국시대</option>
+			<option value="통일신라시대">통일신라시대</option>
+			<option value="고려시대">고려시대</option>
+			<option value="조선시대">조선시대</option>
+			<option value="근현대">근현대</option>
+		</select> 
+		<br>
+		<input type="submit" value="검색" />
+		</form>
+		
+	</div>
 
 	<div class="artifact">
 		<%
 		String query;
 		request.setCharacterEncoding("utf-8");
 		
-		if (request.getParameter("location").equals("0")) {
-			if (request.getParameter("era").equals("0")){
+		if ("0".equals(request.getParameter("location")) | request.getParameter("location") == null) {
+			if ("0".equals(request.getParameter("era")) | request.getParameter("era") == null){
 				query = "select * from artifact A left join description D on A.ArtifactID = D.HartifactID order by ArtifactID";
 				pstmt = conn.prepareStatement(query);
 				rs = pstmt.executeQuery();
@@ -74,7 +105,7 @@
 			}
 		}
 		else {
-			if (request.getParameter("era").equals("0")) {
+			if ("0".equals(request.getParameter("era")) | request.getParameter("era") == null) {
 				query = "select * from artifact A left join description D on A.ArtifactID = D.HartifactID where location = " + "'" + request.getParameter("location") + "' order by ArtifactID";
 				pstmt = conn.prepareStatement(query);
 				rs = pstmt.executeQuery();
@@ -107,7 +138,6 @@
 		rs.close();
 		pstmt.close();
 		%>
-		<button onclick="location.href='artifact.html'">다시 검색하기</button>
 	</div>
 </body>
 </html>
