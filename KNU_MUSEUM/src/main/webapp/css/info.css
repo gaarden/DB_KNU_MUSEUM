@@ -1,0 +1,76 @@
+/* main.css */
+body {
+	background-image: url('../img/knu_museum.png');
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+}
+
+.info {
+	background-color: white;
+	background-position: center;
+	opacity: 0.8;
+	margin: 50px;
+	border-radius: 15px;
+	overflow: hidden;
+	text-align: center;
+	color: black;
+}
+
+.info h3 {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.info iframe {
+	border: 0;
+}
+
+.info table {
+	margin: 0 auto;
+	border-collapse: collapse;
+	border: 1px solid #ddd;
+	margin-bottom: 20px;
+}
+
+.info th, .info td {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+.artifact {
+	background-color: white;
+	background-position: center;
+	margin: 50px;
+	border-radius: 15px;
+	overflow: hidden;
+	text-align: center;
+}
+
+.artifact h3, .artifact h4 {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.artifact selected {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.artifact input, .artifact button {
+	background-color: #994D1C;
+    border-radius: 15px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: white;
+}
+
+.element {
+	background-color: #F5CCA0;
+	border-radius: 15px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin: 50px;
+	opacity: 0.8;
+	color: black;
+}
