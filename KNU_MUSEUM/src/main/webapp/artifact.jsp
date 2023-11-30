@@ -18,7 +18,7 @@
 	<%
 	String serverIP = "localhost";
 	//String strSID = "xe";
-	//String strSID = "orcl";
+	String strSID = "orcl";
 	String portNum = "1521";
 	String user = "KNU_MUSEUM";
 	String pass = "comp322";
