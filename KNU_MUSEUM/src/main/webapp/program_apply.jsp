@@ -84,7 +84,9 @@
 			out.println("<p>* 진행 기간: " + rs.getString(2) + "~" + rs.getString(3) + "</p>");
 			out.println("<p>* 소요 시간: " + rs.getString(4) + "시간</p>");
 			out.println("<p>* 제한 인원: " + rs.getString(5) + "명</p>");
-			out.println("<input type=\"radio\" name=\"program\" value=\"" + rs.getString(1) + "\">");
+			out.println("<input type=\"radio\" name=\"program\" value=\"" + rs.getString(1) + "\" " + "data-start-date=\""
+			+ rs.getString(2) + "\" data-end-date=\"" + rs.getString(3) + "\">");
+			/* out.println("<input type=\"radio\" name=\"program\" value=\"" + rs.getString(1) + "\">"); */
 			out.println("<br>");
 			out.println("</div>");
 		}
@@ -108,6 +110,28 @@
 			<label for="selectedDate">신청 인원:</label> <input type="text"
 				name="num" style="width: 50px;"> <label for="selectedDate">명</label>
 		</div>
+
+		<script>
+			var programRadios = document
+					.querySelectorAll('input[name="program"]');
+			var dateInput = document.getElementById('selectedDate');
+
+			function updateDateRange() {
+				var selectedProgram = document
+						.querySelector('input[name="program"]:checked');
+				if (selectedProgram) {
+					var startDate = selectedProgram
+							.getAttribute('data-start-date');
+					var endDate = selectedProgram.getAttribute('data-end-date');
+					dateInput.setAttribute('min', startDate);
+					dateInput.setAttribute('max', endDate);
+				}
+			}
+
+			programRadios.forEach(function(radio) {
+				radio.addEventListener('change', updateDateRange);
+			});
+		</script>
 
 		<form action="program_apply.jsp" method="Post">
 			<input type="submit" value="신청하기" />
