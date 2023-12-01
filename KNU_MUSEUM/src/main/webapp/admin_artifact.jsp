@@ -97,7 +97,7 @@
 	String query = new String();
 	PreparedStatement pstmt;
 	ResultSet rs;
-	query = "Select Artname, Image, Location, Class, Era, MadminID From Artifact";
+	query = "Select Artname, Image, Location, Class, Era, MadminID From Artifact order by ArtifactID";
 	pstmt = conn.prepareStatement(query);
 	rs = pstmt.executeQuery();
 	out.println("<tbody>");
