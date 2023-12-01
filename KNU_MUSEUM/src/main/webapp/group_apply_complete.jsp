@@ -70,6 +70,9 @@
 	pstmt.setInt(5, 0); // Status = 0
 	pstmt.setString(6, CuserID);
 	pstmt.setString(7, CadminID);
+	
+	int res = pstmt.executeUpdate();
+	
 	pstmt.close();
 	%>
 

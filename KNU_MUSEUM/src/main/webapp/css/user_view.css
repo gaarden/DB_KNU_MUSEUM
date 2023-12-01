@@ -12,6 +12,7 @@ body {
   padding: 1rem;
   margin: 1rem;
   border-radius: 1rem;
+  text-align: center;
 }
 
 .table-responsive p{
@@ -25,4 +26,22 @@ div button{
      border: none;
      border-radius: 25%;
      size: 2rem;
+}
+
+.box {
+	background-color: white;
+	background-position: center;
+	margin: 50px;
+	border-radius: 15px;
+	overflow: hidden;
+	text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.box h2 {
+	margin-top: 20px;
+	width: 100%;
 }
