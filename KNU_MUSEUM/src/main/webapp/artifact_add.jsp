@@ -25,6 +25,7 @@
 	String pass = "comp322";
 	String url = "jdbc:oracle:thin:@" + serverIP + ":" + portNum + ":" + strSID;
 	Connection conn = null;
+	Statement stmt = null;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
 
@@ -72,7 +73,7 @@
 	</ul>
 
 	<div class="info">
-		<form action="artifact_add.jsp" method="Post">
+		<form action="artifact_add.jsp" method="Post" onsubmit="submitForm()">
 			<div class="row mb-3">
 				<label for="colFormLabel" class="col-sm-2 col-form-label">유물이름</label>
 				<div class="col-sm-10">
@@ -133,47 +134,70 @@
 			<button type="submit" class="btn btn-secondary" value="Submit">제출</button>
 		</form>
 	</div>
-<%
+	<script>
+    function submitForm() {
+        location.href = 'admin_artifact.jsp';
+    }
+	</script>
+	
+	<%
 	String query = new String();
-	PreparedStatement pstmt;
+	PreparedStatement pstmt = null;
 	ResultSet rs;
-	query = "select Count(1) from Artifact";
-	pstmt = conn.prepareStatement(query);
-	rs = pstmt.executeQuery();
+	stmt = conn.createStatement();
 	request.setCharacterEncoding("utf-8");
-	int row = 0;
-	if(rs.next())
-		row = rs.getInt(1);
-	String cnt = Integer.toString(row+1);
-	String aID = "A" + cnt;
-	String aName = request.getParameter("artifact_name");
-	String aPicture = request.getParameter("artifact_picture");
-	String aClass = request.getParameter("artifact_class");
-	String aLocation = request.getParameter("artifact_location");
-	String aEra = request.getParameter("artifact_era");
-	String MadminID;
-	if (aLocation == null) {
-		MadminID = "admin662";
-	} else if (aLocation.equals("제2전시실")) {
-		MadminID = "admin168";
-	} else if (aLocation.equals("제3전시실")) {
-		MadminID = "admin239";
-	} else if (aLocation.equals("제4전시실")) {
-		MadminID = "admin131";
-	} else if (aLocation.equals("제5전시실")) {
-		MadminID = "admin870";
-	} else {
-		MadminID = "admin662";
-	}
-	query = "Insert Into Artifact Values ('"  + aID + "' ,'" + aName + "', '" + aPicture + "' , '" + aClass + "' , '" + aLocation + "' , '" + aEra + "' , '" + MadminID + "')";
-	out.println(query);
-	//insert가 계속 안됨 -> 해결 필요!!
-%>
 
-<%
-	rs.close();
-	pstmt.close();
-	conn.close();
-%>
+	String aName = "";
+	aName = request.getParameter("artifact_name");
+
+	if (aName != null && !aName.isEmpty()) {
+
+		// ArtifactID 설정
+		String maxArtifactIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(ArtifactID, 2))) AS MaxArtifactID FROM ARTIFACT";
+		ResultSet maxArtifactIDResultSet = stmt.executeQuery(maxArtifactIDQuery);
+		maxArtifactIDResultSet.next();
+		int maxArtifactIDNumber = maxArtifactIDResultSet.getInt("MaxArtifactID");
+		int newArtifactIDNumber = maxArtifactIDNumber + 1;
+		String newArtifactID = "A" + newArtifactIDNumber;
+		maxArtifactIDResultSet.close();
+
+		aName = request.getParameter("artifact_name");
+		String aPicture = request.getParameter("artifact_picture");
+		String aClass = request.getParameter("artifact_class");
+		String aLocation = request.getParameter("artifact_location");
+		String aEra = request.getParameter("artifact_era");
+		String MadminID;
+
+		if (aLocation == null) {
+			MadminID = "admin662";
+		} else if (aLocation.equals("제2전시실")) {
+			MadminID = "admin168";
+		} else if (aLocation.equals("제3전시실")) {
+			MadminID = "admin239";
+		} else if (aLocation.equals("제4전시실")) {
+			MadminID = "admin131";
+		} else if (aLocation.equals("제5전시실")) {
+			MadminID = "admin870";
+		} else {
+			MadminID = "admin662";
+		}
+		query = "INSERT INTO ARTIFACT (ArtifactID, Artname, Image, Location, Class, Era, MadminID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		pstmt = conn.prepareStatement(query);
+		pstmt.setString(1, newArtifactID);
+		pstmt.setString(2, aName);
+		pstmt.setString(3, aPicture);
+		pstmt.setString(4, aLocation);
+		pstmt.setString(5, aClass);
+		pstmt.setString(6, aEra);
+		pstmt.setString(7, MadminID);
+
+		int res = pstmt.executeUpdate();
+		
+		pstmt.close();
+		conn.close();
+		
+		response.sendRedirect("admin_artifact.jsp");
+	}
+	%>
 </body>
 </html>
