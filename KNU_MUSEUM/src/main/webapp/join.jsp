@@ -98,7 +98,7 @@
 				+ "', '" + request.getParameter("name") + "', '" + request.getParameter("email") + "', '"
 				+ request.getParameter("phoneNumber") + "')";
 
-	//	pstmt = conn.prepareStatement(query);
+		pstmt = conn.prepareStatement(query);
 
 		int result = pstmt.executeUpdate();
 

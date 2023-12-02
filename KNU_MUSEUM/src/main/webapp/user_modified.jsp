@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>KNU_MUSEUM</title>
 <link rel="stylesheet" type="text/css" href="css/user_modify_info.css">
+<link rel="stylesheet" type="text/css" href="css/program.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -67,33 +68,38 @@
 	
 	%>
 	
-		<nav class="navbar navbar-expand-lg bg-body-tertiary">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="main.html"> <img
-				src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24"
-				class="d-inline-block align-text-top">
-			</a>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="info.html">이용안내</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="artifact.jsp">소장유물</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">체험프로그램</a></li>
-				</ul>
-				<span class="navbar-text">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
-					</ul>
-				</span>
-			</div>
-		</div>
-	</nav>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"> <img
+                    src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24"
+                    class="d-inline-block align-text-top">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active"
+                                         aria-current="page" href="info_for_user.jsp">이용안내</a></li>
+                <li class="nav-item"><a class="nav-link active"
+                                         aria-current="page" href="artifact_for_user.jsp">소장유물</a></li>
+                <li class="nav-item"><a class="nav-link active"
+                                         aria-current="page" href="program_for_user.jsp">체험프로그램</a></li>
+                <li class="nav-item"><a class="nav-link active"
+                                         aria-current="page" href="program_apply.jsp">체험 프로그램 신청</a></li>
+                <li class="nav-item"><a class="nav-link active"
+                                         aria-current="page" href="group_apply.jsp">단체관람 신청</a></li>
+            </ul>
+            <span class="navbar-text">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="user_view.jsp">My Page</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
+                    </ul>
+                </span>
+        </div>
+    </div>
+</nav>
 
-<div class="result-container">
-    <h2 class="text-center mb-4">개인정보 수정 결과</h2>
+
+    <div class="box">
     <%
         if (updateResult > 0) {
     %>

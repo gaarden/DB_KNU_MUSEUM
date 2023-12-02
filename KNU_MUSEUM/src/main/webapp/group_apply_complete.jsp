@@ -70,9 +70,9 @@
 	pstmt.setInt(5, 0); // Status = 0
 	pstmt.setString(6, CuserID);
 	pstmt.setString(7, CadminID);
-	
+
 	int res = pstmt.executeUpdate();
-	
+
 	pstmt.close();
 	%>
 
@@ -99,6 +99,7 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link" href="user_view.jsp">My
 								Page</a></li>
+						<li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
 					</ul>
 				</span>
 			</div>
@@ -111,7 +112,7 @@
 			<thead>
 				<tr>
 					<th scope="col">신청 날짜</th>
-					<th scope="col">신청 시간</th>
+					<th scope="col">시작 시간</th>
 					<th scope="col">신청 인원</th>
 				</tr>
 			</thead>
@@ -123,6 +124,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<br /> <a href="user_view.jsp"><h4>단체관람 신청내역 확인하기</h4></a>
 	</div>
 
 

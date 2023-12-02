@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>KNU_MUSEUM_DB</title>
 <link rel="stylesheet" type="text/css" href="css/user_view.css">
+<link rel="stylesheet" type="text/css" href="css/program.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -86,8 +87,9 @@
 				</ul>
 				<span class="navbar-text">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link" href="user_view.jsp">마이페이지</a>
+						<li class="nav-item"><a class="nav-link" href="user_view.jsp">My Page</a>
 						</li>
+						<li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
 					</ul>
 				</span>
 			</div>
@@ -103,6 +105,7 @@
 	
 	<div class="box">
 		<h2 style="margin-bottom: 20px;">신청이 취소되었습니다.</h2>
+		<a href="user_view.jsp"><h4>My Page로 돌아가기 </h4></a>
 	</div>
 	
 

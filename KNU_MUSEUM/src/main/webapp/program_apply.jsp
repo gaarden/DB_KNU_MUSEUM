@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page language="java"
 	import="java.text.*, java.sql.*, java.time.LocalDate"%>
-	<%@ page import="common.Person"%>
+<%@ page import="common.Person"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +32,6 @@
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
 
-
 	String UserID = (String) session.getAttribute("UserID");
 	%>
 
@@ -45,7 +44,7 @@
 			</a>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link active"
+					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="info_for_user.jsp">이용안내</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="artifact_for_user.jsp">소장유물</a></li>
@@ -60,6 +59,7 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link" href="user_view.jsp">My
 								Page</a></li>
+						<li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
 					</ul>
 				</span>
 			</div>

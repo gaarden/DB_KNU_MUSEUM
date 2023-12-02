@@ -59,6 +59,7 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link" href="user_view.jsp">
 								My Page</a></li>
+						<li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
 					</ul>
 				</span>
 			</div>
@@ -66,7 +67,7 @@
 	</nav>
 
 	<div class="box">
-		<form action="program.jsp" method="Post">
+		<form action="program_for_user.jsp" method="Post">
 			<input type="text" name="keyword" placeholder="검색어 입력" /> <input
 				type="submit" value="검색" /> <br> <input type="radio"
 				name="chk_info" value="0">전체 프로그램 조회 <input type="radio"
