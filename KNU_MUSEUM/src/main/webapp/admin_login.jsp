@@ -54,8 +54,8 @@
 				</ul>
 				<span class="navbar-text">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link"
-							href="admin_view.jsp">관리자페이지</a></li>
+						<li class="nav-item"><%=AdminID %>님이 관리중입니다.</li>
+						<li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
 					</ul>
 				</span>
 			</div>

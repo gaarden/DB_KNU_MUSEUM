@@ -31,33 +31,33 @@
 
 	request.setCharacterEncoding("utf-8");
 
-	 String UserID = (String) session.getAttribute("UserID");
+	String AdminID = (String) session.getAttribute("AdminID");
 	%>
 	
-	<nav class="navbar navbar-expand-lg bg-body-tertiary">
- <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-    </a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="artifact.html">소장유물</a>
-        </li>
-         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="program.html">체험프로그램</a>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="user_view.jsp">마이페이지</a>
-        </li>
-        </ul>
-      </span>
-    </div>
-  </div>
-</nav>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"> <img
+				src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24"
+				class="d-inline-block align-text-top">
+			</a>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="admin_artifact.jsp">유물관리</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="program_manage.jsp">체험프로그램 관리</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="group_manage.jsp">단체프로그램 관리</a></li>
+				</ul>
+				<span class="navbar-text">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><%=AdminID %>님이 관리중입니다.</li>
+						<li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
+					</ul>
+				</span>
+			</div>
+		</div>
+	</nav>
 <br>
 <ul class="nav nav-underline justify-content-center">
   <li class="nav-item">
