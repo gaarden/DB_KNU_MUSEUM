@@ -56,7 +56,7 @@
 				</ul>
 				<span class="navbar-text">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><%=AdminID%>님이 관리중입니다.</li>
+						<li class="nav-item"><a class="nav-link" href="#"><%=AdminID%>님이 관리중입니다.</a></li>
 						<li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
 					</ul>
 				</span>
@@ -103,7 +103,7 @@
 			}
 			%>
 		</table>
-		
+		<br>
 		<p>전체 체험 프로그램 리스트</p>
 		<table class="table align-middle">
 			<thead class="table-warning">

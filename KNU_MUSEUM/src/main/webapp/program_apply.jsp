@@ -121,15 +121,17 @@
 			%>
 
 			<div class="date-container">
-				<label for="selectedDate">날짜 및 시간:</label> <input type="date"
-					id="selectedDate" name="selectedDate" style="margin: 10px;">
-				<input type="radio" name="time" value="9">오전 9시 <input
-					type="radio" name="time" value="14">오후 2시
-			</div>
+				<label for="selectedDate">날짜: <input  class="btn btn-outline" type="date"
+					id="selectedDate" name="selectedDate" style="margin: 10px; border-color:black"></label></div>
+			<div class="date-container">
+				<label for="selectedDate">시간:</label> 
+				<input  type="checkbox" name="time" value="9"> 오전 9시  <input
+					 type="checkbox" name="time" value="14"> 오후 2시</label></div>
+			
 
 			<div class="date-container">
-				<label for="selectedDate">신청 인원:</label> <input type="text"
-					name="num" style="width: 50px;"> <label for="selectedDate">명</label>
+				<label for="selectedDate">신청 인원:</label> <input class="btn btn-outline" type="text"
+					name="num" style="width: 50px; border-color:black"> <label for="selectedDate">명</label>
 			</div>
 
 			<script>
@@ -187,7 +189,7 @@
 				});
 			</script>
 
-			<input type="submit" value="신청하기" />
+			<input class="btn" type="submit" value="신청하기" style="background-color:#6C757D"/>
 		</div>
 	</form>
 

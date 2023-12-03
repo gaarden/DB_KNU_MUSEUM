@@ -47,19 +47,16 @@
 			</div>
 		</div>
 	</nav>
-
+	<br>
 
 	<div class="form-container">
 		<form class="row g-3" action="login.jsp" method="post">
 
 			<h2 class="text-center mb-4">로그인</h2>
-
+	
 			<label>
-				<input type="radio" name="select" id="foruser" value="user"> 회원
-			</label>
-
-			<label>
-				<input type="radio" name="select" id="foradmin" value="admin"> 직원
+				<input class="form-check-input" type="checkbox" name="select" id="foruser" value="user"> 회원
+				<input class="form-check-input" type="checkbox" name="select" id="foradmin" value="admin" style="margin-left:10%"> 직원
 			</label>
 
 
@@ -72,14 +69,15 @@
 				<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력해 주세요">
 			</div>
 			<div class="d-grid gap-2 col-6 mx-auto">
-				<button class="btn btn-primary" type="submit">로그인</button>
+				<button class="btn btn-secondary" type="submit">로그인</button>
 			</div>
 		</form>
 		<br />
-		<a href="http://localhost:8080/KNU_MUSEUM/join.html">회원가입 </a> |
-
-		<a href="http://localhost:8080/KNU_MUSEUM/searchid.html">아이디 찾기</a> |
-		<a href="http://localhost:8080/KNU_MUSEUM/searchpw.html">비밀번호 찾기</a>
+		<div style="text-align:center">
+		<a href="http://localhost:8080/KNU_MUSEUM/join.html" style="color:#6C757D">회원가입</a> | 
+		<a href="http://localhost:8080/KNU_MUSEUM/searchid.html" style="color:#6C757D">아이디 찾기</a> | 
+		<a href="http://localhost:8080/KNU_MUSEUM/searchpw.html" style="color:#6C757D">비밀번호 찾기</a>
+		</div>
 	</div>
 
 </body>

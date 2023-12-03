@@ -31,8 +31,7 @@
 
 	String AdminID = (String) session.getAttribute("AdminID");
 	%>
-
-	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#"> <img
 				src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24"
@@ -41,18 +40,20 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="info.html">이용안내</a></li>
-					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="admin_artifact.jsp">유물관리</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">체험프로그램 관리</a></li>
+						aria-current="page" href="program_manage.jsp">체험프로그램 관리</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">단체프로그램 관리</a></li>
+						aria-current="page" href="program_apply_manage.jsp">체험프로그램 신청서
+							관리</a></li>
+
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="group_apply_manage.jsp">단체관람 신청서 관리</a></li>
 				</ul>
 				<span class="navbar-text">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link" href="#">관리자페이지</a>
-						</li>
+						<li class="nav-item"><a class="nav-link" href="#"><%=AdminID%>님이 관리중입니다.</a></li>
+						<li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
 					</ul>
 				</span>
 			</div>
@@ -61,15 +62,11 @@
 	<br>
 	<ul class="nav nav-underline justify-content-center">
 		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="admin_artifact.jsp">유물 리스트</a></li>
+			aria-current="page" href="admin_artifact.jsp">유물 조회하기</a></li>
 		<li class="nav-item"><a class="nav-link active"
 			aria-current="page" href="artifact_add.jsp">유물 추가하기</a></li>
 		<li class="nav-item"><a class="nav-link active"
 			aria-current="page" href="artifact_edit.jsp">유물 편집하기</a></li>
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="artifact_delete.jsp">유물 삭제하기</a></li>
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="artifact_search.jsp">유물 조회하기</a></li>
 	</ul>
 
 	<div class="info">

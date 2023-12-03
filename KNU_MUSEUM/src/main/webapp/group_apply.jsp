@@ -54,18 +54,22 @@
 			<h3>* 단체 관람 소요 시간은 90분 입니다.</h3>
 			<h3>* 단체 관람은 8명 이상부터 신청 가능합니다. (최대 100명)</h3>
 			<div class="date-container">
-				<label for="selectedDate">날짜:</label> <input type="date"
-					id="selectedDate" name="selectedDate" style="margin: 10px;"
-					min="<%=getTomorrow()%>"> <label for="selectedDate">관람
-					시작 시간:</label> <input type="number" name="time" style="width: 50px;">
-				<label for="selectedDate">시</label>
-			</div>
-			<div class="date-container">
-				<label for="selectedDate">신청 인원:</label> <input type="number"
-					name="num" style="width: 50px;"> <label for="selectedDate">명</label>
+				<label for="selectedDate">날짜:</label> <input class="btn btn-outline" type="date"
+					id="selectedDate" name="selectedDate" style="margin: 10px; border-color:black"
+					min="<%=getTomorrow()%>">
 			</div>
 
-			<input type="submit" value="신청하기" />
+			<div class="date-container">
+				<label for="selectedDate">관람 시작 시간:</label> <input class="btn btn-outline" type="number"
+					name="time" style="width: 50px; border-color:black"> <label for="selectedDate">시</label>
+			</div>
+			<div class="date-container">
+				<label for="selectedDate">신청 인원:</label> <input  class="btn btn-outline" type="number"
+					name="num" style="width: 50px; border-color:black"> <label for="selectedDate">명</label>
+			</div>
+
+			<input class="btn" type="submit" value="신청하기"
+				style="background-color: #6C757D" />
 
 		</div>
 	</form>

@@ -61,12 +61,6 @@
 		</div>
 	</nav>
 	<br>
-	<ul class="nav nav-underline justify-content-center">
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="admin_artifact.jsp">유물 리스트</a></li>
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="artifact_add.jsp">유물 추가하기</a></li>
-	</ul>
 	<div class="info">
 		<form action="program_edit_complete.jsp" method="Post">
 			<%
