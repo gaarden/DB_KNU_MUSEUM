@@ -49,7 +49,7 @@
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="artifact_for_user.jsp">소장유물</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="program_for_user">체험프로그램</a></li>
+						aria-current="page" href="program_for_user.jsp">체험프로그램</a></li>
 						<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="program_apply.jsp">체험프로그램 신청</a></li>
 					<li class="nav-item"><a class="nav-link active"

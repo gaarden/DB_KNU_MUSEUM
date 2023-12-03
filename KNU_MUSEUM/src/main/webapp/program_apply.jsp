@@ -81,22 +81,36 @@
 
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int cnt = rsmd.getColumnCount();
-
+			%>
+		
+			<table class="table align-middle">
+				<thead class="table-warning">
+					<tr>
+						<td>프로그램 제목</td>
+						<td>진행 기간</td>
+						<td>소요 시간</td>
+						<td>제한 인원</td>
+					</tr>
+				</thead>
+			<%
+			out.println("<tbody>");
 			while (rs.next()) {
-				out.println("<div class=\"element\">");
-				out.println("<br>");
 				String title = rs.getString(2);
 				title = title.replace("<", "&lt;").replace(">", "&gt;");
-				out.println("<h4>" + title + "</h4>");
-				out.println("<p>* 진행 기간: " + rs.getString(3) + "~" + rs.getString(4) + "</p>");
-				out.println("<p>* 소요 시간: " + rs.getString(5) + "시간</p>");
-				out.println("<p>* 제한 인원: " + rs.getString(6) + "명</p>");
-				out.println("<input type=\"radio\" name=\"program\" value=\"" + rs.getString(1) + "\" " + "data-start-date=\""
-				+ rs.getString(3) + "\" data-end-date=\"" + rs.getString(4) + "\">");
-				out.println("<br>");
-				out.println("<br>");
-				out.println("</div>");
+				out.println("<tr>");
+				out.println("<td>" + title + "</td>");
+				out.println("<td>" + rs.getString(3) + "~" + rs.getString(4) + "</td>");
+				out.println("<td>" + rs.getString(5) + "시간</td>");
+				out.println("<td>" + rs.getString(6) + "명</td>");
+				out.println("</tr>");
 			}
+			rs.close();
+			pstmt.close();
+			%>
+			</tbody>
+			</table>
+		
+			<%
 
 			rs.close();
 			pstmt.close();
@@ -174,7 +188,6 @@
 			</script>
 
 			<input type="submit" value="신청하기" />
-
 		</div>
 	</form>
 

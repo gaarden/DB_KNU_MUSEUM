@@ -121,34 +121,35 @@
 
 				<form class="row g-3" action="user_modified.jsp" method="post">
 					<div class="input-group mb-3">
-						<span class="input-group-text" id="basic-addon1">@아이디</span> <span
-							class="form-control" aria-label="Username"
-							aria-describedby="basic-addon1"><%=UserID%></span>
+						<span class="input-group-text" id="basic-addon1" style="width:27%; background-color:#FFF3CD;">아이디</span> <input
+							type="text" class="form-control" name="Username"
+							aria-label="Recipient's username"
+							aria-describedby="basic-addon2" value="<%=UserID%>" aria-label="Disabled input example" disabled readonly>
 					</div>
 
 					<div class="input-group mb-3">
-						<span class="input-group-text" id="basic-addon1">비밀번호</span> <input
+						<span class="input-group-text" id="basic-addon1" style="width:27%; background-color:#FFF3CD;">비밀번호</span> <input
 							type="password" class="form-control" name="password"
 							placeholder="비밀번호" aria-label="Recipient's username"
 							aria-describedby="basic-addon2" value="<%=password%>">
 					</div>
 
 					<div class="input-group mb-3">
-						<span class="input-group-text" id="basic-addon1">@이름@</span> <input
+						<span class="input-group-text" id="basic-addon1" style="width:27%; background-color:#FFF3CD;">이름</span> <input
 							type="text" class="form-control" name="name" placeholder="이름"
 							aria-label="Recipient's username" aria-describedby="basic-addon2"
 							value="<%=name%>">
 					</div>
 
 					<div class="input-group mb-3">
-						<span class="input-group-text" id="basic-addon1">@이메일</span> <input
+						<span class="input-group-text" id="basic-addon1" style="width:27%; background-color:#FFF3CD;">이메일</span> <input
 							type="email" class="form-control" name="email" placeholder="이메일"
 							aria-label="Recipient's username" aria-describedby="basic-addon2"
 							value="<%=Email%>">
 					</div>
 
 					<div class="input-group mb-3">
-						<span class="input-group-text" id="basic-addon1">전화번호</span> <input
+						<span class="input-group-text" id="basic-addon1" style="width:27%; background-color:#FFF3CD;">전화번호</span> <input
 							type="tel" class="form-control" name="PNumber" placeholder="전화번호"
 							aria-label="Recipient's username" aria-describedby="basic-addon2"
 							value="<%=Pnumber%>">
