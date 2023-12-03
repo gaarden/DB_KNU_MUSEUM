@@ -117,9 +117,11 @@
                 <td><%=rs.getString(4)%>명</td>
                 <td>
                     <%
-                        if (rs.getString(5).equals("0")) {
+                        if (rs.getString(5).equals("2")) {
                             out.println("대기");
-                        } else {
+                        } else if(rs.getString(5).equals("0")) {
+                            out.println("반려");
+                        }else if(rs.getString(5).equals("1")) {
                             out.println("승인");
                         }
                     %>
@@ -183,11 +185,13 @@
                 <td><%=rs.getString(3)%>명</td>
                 <td>
                     <%
-                        if (rs.getString(4).equals("0")) {
-                            out.println("대기");
-                        } else {
-                            out.println("승인");
-                        }
+                    if (rs.getString(4).equals("2")) {
+                        out.println("대기");
+                    } else if(rs.getString(5).equals("0")) {
+                        out.println("반려");
+                    }else if(rs.getString(5).equals("1")) {
+                        out.println("승인");
+                    }
                     %>
                 </td>
                 <td>

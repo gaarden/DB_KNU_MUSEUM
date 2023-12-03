@@ -59,40 +59,36 @@
 	
 	<%
 	String serverIP = "localhost";
-	//String strSID = "xe";
-	String strSID = "orcl";
+	String strSID = "xe";
+	//String strSID = "orcl";
 	String portNum = "1521";
 	String user = "KNU_MUSEUM";
 	String pass = "comp322";
 	String url = "jdbc:oracle:thin:@" + serverIP + ":" + portNum + ":" + strSID;
 
 	Connection conn = null;
-	PreparedStatement pstmtDeleteDesc = null;
-	PreparedStatement pstmtDeleteArtifact = null;
+	PreparedStatement pstmtDeleteProgram = null;
+	PreparedStatement pstmtDeleteApp = null;
 
 	String AdminID = (String) session.getAttribute("AdminID");
-	String artifactID = request.getParameter("ArtifactID");
+	String EduID = request.getParameter("EduID");
 
 	try {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		conn = DriverManager.getConnection(url, user, pass);
-
-		// Delete from DESCRIPTION table first
-		String deleteDescQuery = "DELETE FROM DESCRIPTION WHERE HartifactID=?";
-		pstmtDeleteDesc = conn.prepareStatement(deleteDescQuery);
-		pstmtDeleteDesc.setString(1, artifactID);
-		pstmtDeleteDesc.executeUpdate();
-
-		// Now, delete from ARTIFACT table
-		String deleteArtifactQuery = "DELETE FROM ARTIFACT WHERE ArtifactID=?";
-		pstmtDeleteArtifact = conn.prepareStatement(deleteArtifactQuery);
-		pstmtDeleteArtifact.setString(1, artifactID);
-		int rowsAffected = pstmtDeleteArtifact.executeUpdate();
 		
-		out.println("<div class=\"box\">");
-		// Display a message based on the delete result
-		if (rowsAffected > 0) {
-            response.sendRedirect("admin_artifact.jsp");
+		String deleteAppQuery = "Delete from museum_program_application where ceduID = ?";
+		pstmtDeleteApp = conn.prepareStatement(deleteAppQuery);
+		pstmtDeleteApp.setString(1, EduID);
+		pstmtDeleteApp.executeUpdate();
+
+		String deleteProgramQuery = "DELETE FROM MUSEUM_PROGRAM_LIST WHERE EduID=?";
+		pstmtDeleteProgram = conn.prepareStatement(deleteProgramQuery);
+		pstmtDeleteProgram.setString(1, EduID);
+		int res = pstmtDeleteProgram.executeUpdate();
+		
+		if (res > 0) {
+            response.sendRedirect("program_manage.jsp");
         } else {
             // Handle the case where the update was not successful
             out.println("Delete failed.");
@@ -101,10 +97,8 @@
 		e.printStackTrace();
 	} finally {
 		try {
-			if (pstmtDeleteDesc != null)
-		pstmtDeleteDesc.close();
-			if (pstmtDeleteArtifact != null)
-		pstmtDeleteArtifact.close();
+			if (pstmtDeleteProgram != null)
+		pstmtDeleteProgram.close();
 			if (conn != null)
 		conn.close();
 		} catch (SQLException e) {
