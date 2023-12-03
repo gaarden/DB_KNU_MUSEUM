@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>KNU_MUSEUM</title>
-<link rel="stylesheet" type="text/css" href="css/artifact_edit.css">
+<link rel="stylesheet" type="text/css" href="css/artifact_add.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -25,6 +25,7 @@
 	String pass = "comp322";
 	String url = "jdbc:oracle:thin:@" + serverIP + ":" + portNum + ":" + strSID;
 	Connection conn = null;
+	Statement stmt = null;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
 
@@ -40,9 +41,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="info.html">이용안내</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">유물관리</a></li>
+						aria-current="page" href="admin_artifact.jsp">유물관리</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="#">체험프로그램 관리</a></li>
 					<li class="nav-item"><a class="nav-link active"
@@ -63,35 +62,118 @@
 			aria-current="page" href="admin_artifact.jsp">유물 리스트</a></li>
 		<li class="nav-item"><a class="nav-link active"
 			aria-current="page" href="artifact_add.jsp">유물 추가하기</a></li>
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="artifact_edit.jsp">유물 편집하기</a></li>
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="artifact_delete.jsp">유물 삭제하기</a></li>
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="artifact_search.jsp">유물 조회하기</a></li>
 	</ul>
-
 	<div class="info">
-		<form action="artifact_add.jsp" method="Post">
+		<form action="artifact_edit_complete.jsp" method="Post">
+			<%
+			// Get the ArtifactID from the request parameter
+			String ArtifactID = request.getParameter("ArtifactID");
+
+			// Declare variables to store retrieved details
+			String Artname = "";
+			String Image = "";
+			String Location = "";
+			String Class = "";
+			String Era = "";
+			String MadminID = "";
+
+			// Check if ArtifactID is not null
+			if (ArtifactID != null && !ArtifactID.isEmpty()) {
+				try {
+					// Prepare SQL statement to retrieve details for the given ArtifactID
+					String query = "SELECT Artname, Image, Location, Class, Era, MadminID FROM Artifact WHERE ArtifactID = ?";
+					PreparedStatement pstmt = conn.prepareStatement(query);
+					pstmt.setString(1, ArtifactID);
+
+					// Execute the query
+					ResultSet rs = pstmt.executeQuery();
+
+					// Check if the result set has a row
+					if (rs.next()) {
+				// Retrieve details
+				Artname = rs.getString("Artname");
+				Image = rs.getString("Image");
+				Location = rs.getString("Location");
+				Class = rs.getString("Class");
+				Era = rs.getString("Era");
+				MadminID = rs.getString("MadminID");
+					}
+
+					// Close resources
+					rs.close();
+					pstmt.close();
+				} catch (Exception e) {
+					// Handle exceptions
+					e.printStackTrace();
+				}
+			} else {
+				// Handle the case where ArtifactID is null or empty
+				out.println("ArtifactID is not specified.");
+			}
+			%>
+			<h2 style="margin-bottom: 20px;">기존 정보</h2>
 			<div class="row mb-3">
 				<label for="colFormLabel" class="col-sm-2 col-form-label">유물이름</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="colFormLabel"
-						placeholder="유물이름" name="artifact_name">
+						placeholder="유물이름" name="artifact_name" value="<%=Artname%>"
+						readonly>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label for="colFormLabel" class="col-sm-2 col-form-label">유물사진</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="colFormLabel"
+						placeholder="유물사진" name="artifact_picture" value="<%=Image%>"
+						readonly>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label for="colFormLabel" class="col-sm-2 col-form-label">유물분류</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="colFormLabel"
+						placeholder="유물분류" name="artifact_class" value="<%=Class%>"
+						readonly>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label for="colFormLabel" class="col-sm-2 col-form-label">전시실</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="colFormLabel"
+						placeholder="전시실" name="artifact_location" value="<%=Location%>"
+						readonly>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label for="colFormLabel" class="col-sm-2 col-form-label">시대</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="colFormLabel"
+						placeholder="시대" name="artifact_era" value="<%=Era%>" readonly>
+				</div>
+			</div>
+
+			<hr class="my-4">
+
+			<h2 style="margin-bottom: 20px;">수정 정보</h2>
+			<div class="row mb-3">
+				<label for="colFormLabel" class="col-sm-2 col-form-label">유물이름</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="colFormLabel"
+						placeholder="유물이름" name="nartifact_name">
 				</div>
 			</div>
 			<div class="row mb-3">
 				<label for="colFormLabel" class="col-sm-2 col-form-label">유물사진</label>
 				<div class="col-sm-10">
 					<input class="form-control" type="file" id="formFile"
-						name="artifact_picture">
+						name="nartifact_picture">
 				</div>
 			</div>
 
 			<div class="row mb-3">
 				<label for="colFormLabel" class="col-sm-2 col-form-label">유물분류</label>
 				<div class="col-sm-10">
-					<input name="artifact_class" type="text" class="form-control"
+					<input name="nartifact_class" type="text" class="form-control"
 						placeholder="유물분류" aria-label="Recipient's username"
 						aria-describedby="basic-addon2">
 				</div>
@@ -100,7 +182,7 @@
 			<div class="row mb-3">
 				<label for="colFormLabel" class="col-sm-2 col-form-label">전시실</label>
 				<div class="col-sm-10">
-					<select name="artifact_location" class="form-select"
+					<select name="nartifact_location" class="form-select"
 						aria-label="Default select example">
 						<option value=null selected>전체</option>
 						<option value="제1전시실">제1전시실</option>
@@ -115,7 +197,7 @@
 			<div class="row mb-3">
 				<label for="colFormLabel" class="col-sm-2 col-form-label">시대</label>
 				<div class="col-sm-10">
-					<select name="artifact_era" class="form-select"
+					<select name="nartifact_era" class="form-select"
 						aria-label="Default select example">
 						<option value="0" selected>전체</option>
 						<option value="구석기시대">구석기시대</option>
@@ -130,50 +212,12 @@
 					</select>
 				</div>
 			</div>
+
+			<input type="hidden" name="ArtifactID" value="<%=ArtifactID%>">
+			<input type="hidden" name="MadminID" value="<%=MadminID%>">
+
 			<button type="submit" class="btn btn-secondary" value="Submit">제출</button>
 		</form>
 	</div>
-<%
-	String query = new String();
-	PreparedStatement pstmt;
-	ResultSet rs;
-	query = "select Count(1) from Artifact";
-	pstmt = conn.prepareStatement(query);
-	rs = pstmt.executeQuery();
-	request.setCharacterEncoding("utf-8");
-	int row = 0;
-	if(rs.next())
-		row = rs.getInt(1);
-	String cnt = Integer.toString(row+1);
-	String aID = "A" + cnt;
-	String aName = request.getParameter("artifact_name");
-	String aPicture = request.getParameter("artifact_picture");
-	String aClass = request.getParameter("artifact_class");
-	String aLocation = request.getParameter("artifact_location");
-	String aEra = request.getParameter("artifact_era");
-	String MadminID;
-	if (aLocation == null) {
-		MadminID = "admin662";
-	} else if (aLocation.equals("제2전시실")) {
-		MadminID = "admin168";
-	} else if (aLocation.equals("제3전시실")) {
-		MadminID = "admin239";
-	} else if (aLocation.equals("제4전시실")) {
-		MadminID = "admin131";
-	} else if (aLocation.equals("제5전시실")) {
-		MadminID = "admin870";
-	} else {
-		MadminID = "admin662";
-	}
-	query = "Insert Into Artifact Values ('"  + aID + "' ,'" + aName + "', '" + aPicture + "' , '" + aClass + "' , '" + aLocation + "' , '" + aEra + "' , '" + MadminID + "')";
-	out.println(query);
-	//insert가 계속 안됨 -> 해결 필요!!
-%>
-
-<%
-	rs.close();
-	pstmt.close();
-	conn.close();
-%>
 </body>
 </html>

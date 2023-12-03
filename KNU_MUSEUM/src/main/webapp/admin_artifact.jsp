@@ -72,12 +72,6 @@
 			aria-current="page" href="admin_artifact.jsp">유물 리스트</a></li>
 		<li class="nav-item"><a class="nav-link active"
 			aria-current="page" href="artifact_add.jsp">유물 추가하기</a></li>
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="artifact_edit.jsp">유물 편집하기</a></li>
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="artifact_delete.jsp">유물 삭제하기</a></li>
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="artifact_search.jsp">유물 조회하기</a></li>
 	</ul>
 
 	<div class="table-responsive">
