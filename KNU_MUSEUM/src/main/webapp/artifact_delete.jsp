@@ -92,13 +92,11 @@
 		out.println("<div class=\"box\">");
 		// Display a message based on the delete result
 		if (rowsAffected > 0) {
-			out.println("<h2 style='margin-bottom: 20px; margin-top: 20px;'>정상적으로 삭제되었습니다.</h2>");
-		} else {
-			out.println("<h2 style='margin-bottom: 20px; margin-top: 20px;'>삭제에 실패했습니다.</h2>");
-		}
-		out.println("<button onclick=\"location.href='admin_artifact.jsp'\">돌아가기</button>");
-		out.println("<br></br>");
-		out.println("</div>");
+            response.sendRedirect("admin_artifact.jsp");
+        } else {
+            // Handle the case where the update was not successful
+            out.println("Delete failed.");
+        }
 	} catch (Exception e) {
 		e.printStackTrace();
 	} finally {
