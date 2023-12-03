@@ -43,7 +43,7 @@
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="info.html">이용안내</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">유물관리</a></li>
+						aria-current="page" href="admin_artifact.jsp">유물관리</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="#">체험프로그램 관리</a></li>
 					<li class="nav-item"><a class="nav-link active"

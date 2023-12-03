@@ -6,6 +6,15 @@ body {
     background-attachment: fixed;
 }
 
+.box {
+	background-color: white;
+	background-position: center;
+	margin: 50px;
+	border-radius: 15px;
+	overflow: hidden;
+	text-align: center;
+}
+
 .table-responsive{
   background-color: var(--bs-tertiary-bg);
   color: var(--bs-secondary-bg);
@@ -26,3 +35,4 @@ div button{
      border-radius: 25%;
      size: 2rem;
 }
+
