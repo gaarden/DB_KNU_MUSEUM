@@ -56,8 +56,7 @@
                                          aria-current="page" href="group_apply.jsp">단체관람 신청</a></li>
             </ul>
             <span class="navbar-text">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="user_view.jsp">My Page</a>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">                        <li class="nav-item"><a class="nav-link" href="user_view.jsp">My Page</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
                     </ul>
