@@ -65,7 +65,7 @@
 	</nav>
 	
 	<div class="table-responsive">
-		<p>체험 프로그램 리스트</p>
+		<p><%=AdminID %>님이 담당하는 체험 프로그램</p>
 		<table class="table align-middle">
 			<thead class="table-warning">
 				<tr>
@@ -84,7 +84,7 @@
 			String query = new String();
 			PreparedStatement pstmt;
 			ResultSet rs;
-			query = "Select EduID, Title, TO_CHAR(StartDate, 'yyyy-mm-dd') AS StartDate, TO_CHAR(EndDate, 'yyyy-mm-dd') AS EndDate, PTime, LimitNum, MadminID From MUSEUM_PROGRAM_LIST order by StartDate desc";
+			query = "Select EduID, Title, TO_CHAR(StartDate, 'yyyy-mm-dd') AS StartDate, TO_CHAR(EndDate, 'yyyy-mm-dd') AS EndDate, PTime, LimitNum, MadminID From MUSEUM_PROGRAM_LIST where MadminID='"+AdminID+"' order by StartDate desc";
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			out.println("<tbody>");
@@ -97,26 +97,58 @@
 				out.println("<td>" + (rs.getString(5) != null ? rs.getString(5) : "") + "</td>");
 				out.println("<td>" + (rs.getString(6) != null ? rs.getString(6) : "") + "</td>");
 				out.println("<td>" + (rs.getString(7) != null ? rs.getString(7) : "") + "</td>");
-				
-				if (AdminID != null && AdminID.equals(rs.getString(7))) {
-					// Display edit and delete buttons
-					out.println("<td><button onclick='location.href=\"program_edit.jsp?EduID=" + rs.getString(1) + "\"'>편집</button></td>");
-                    out.println("<td><button onclick='location.href=\"program_delete.jsp?EduID=" + rs.getString(1) + "\"'>삭제</button></td>");
-				} else {
-					// Display empty cells if AdminID doesn't match
-					out.println("<td></td>");
-					out.println("<td></td>");
-				}
-				
+				out.println("<td><button onclick='location.href=\"program_edit.jsp?EduID=" + rs.getString(1) + "\"'>편집</button></td>");
+                out.println("<td><button onclick='location.href=\"program_delete.jsp?EduID=" + rs.getString(1) + "\"'>삭제</button></td>");		
 				out.println("</tr>");
 			}
 			%>
 		</table>
+		
+		<p>전체 체험 프로그램 리스트</p>
+		<table class="table align-middle">
+			<thead class="table-warning">
+				<tr>
+					<td>프로그램 ID</td>
+					<td>프로그램 이름</td>
+					<td>시작 날짜</td>
+					<td>종료 날짜</td>
+					<td>소요 시간</td>
+					<td>프로그램 정원</td>
+					<td>관리자ID</td>
+				
+				</tr>
+			</thead>
+			<%
+			String query2 = new String();
+			PreparedStatement pstmt2;
+			ResultSet rs2;
+			query2 = "Select EduID, Title, TO_CHAR(StartDate, 'yyyy-mm-dd') AS StartDate, TO_CHAR(EndDate, 'yyyy-mm-dd') AS EndDate, PTime, LimitNum, MadminID From MUSEUM_PROGRAM_LIST order by StartDate desc";
+			pstmt2 = conn.prepareStatement(query2);
+			rs2 = pstmt2.executeQuery();
+			out.println("<tbody>");
+			while (rs2.next()) {
+				out.println("<tr>");
+				out.println("<td>" + (rs2.getString(1) != null ? rs2.getString(1) : "") + "</td>");
+				out.println("<td style=\"width: 500px;\">" + (rs2.getString(2) != null ? rs2.getString(2) : "") + "</td>");
+				out.println("<td>" + (rs2.getString(3) != null ? rs2.getString(3) : "") + "</td>");
+				out.println("<td>" + (rs2.getString(4) != null ? rs2.getString(4) : "") + "</td>");
+				out.println("<td>" + (rs2.getString(5) != null ? rs2.getString(5) : "") + "</td>");
+				out.println("<td>" + (rs2.getString(6) != null ? rs2.getString(6) : "") + "</td>");
+				out.println("<td>" + (rs2.getString(7) != null ? rs2.getString(7) : "") + "</td>");
+			
+				out.println("</tr>");
+			}
+			%>
+		</table>
+		
 	</div>
 	<br>
 	<%
 	rs.close();
 	pstmt.close();
+	
+	rs2.close();
+	pstmt2.close();
 	conn.close();
 	%>
 	
