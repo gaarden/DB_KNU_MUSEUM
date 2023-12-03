@@ -65,9 +65,6 @@
 		</div>
 	</nav>
 
-	<%
-	out.println(UserID);
-	%>
 
 </body>
 </html>

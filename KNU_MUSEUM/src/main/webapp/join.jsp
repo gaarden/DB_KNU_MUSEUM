@@ -28,8 +28,6 @@
 	Connection conn = null;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
-	
-	
 	%>
 
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -58,7 +56,6 @@
 	</nav>
 
 	<%
-	
 	request.setCharacterEncoding("utf-8");
 	PreparedStatement pstmt = null;
 	ResultSet rs;
@@ -86,10 +83,10 @@
 
 		<%
 		if (loginState == 1) {
+			out.println("<script>alter('메시지팝업 테스트');</script>");
 		%>
 
-		<p>같은 아이디의 회원이 존재합니다. 새로운 아이디로 회원가입을 진행해주세요</p>
-		<a href="join.html">회원가입 </a> 
+		<a href="join.html">회원가입 </a>
 		<%
 		} else {
 
@@ -106,7 +103,7 @@
 		%>
 
 		<p>회원가입이 성공적으로 완료되었습니다.</p>
-        <a href="login.html">로그인 페이지로 이동</a>
+		<a href="login.html">로그인 페이지로 이동</a>
 
 		<%
 		} else {
@@ -135,8 +132,8 @@
 		}
 		%>
 
-		
-	</div>
 
+	</div>
+	
 </body>
 </html>

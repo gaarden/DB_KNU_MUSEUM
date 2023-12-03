@@ -58,7 +58,7 @@ body {
 }
 
 .artifact input, .artifact button {
-	background-color: #994D1C;
+	background-color: #626A72;
     border-radius: 15px;
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -66,7 +66,7 @@ body {
 }
 
 .element {
-	background-color: #F5CCA0;
+	background-color:#FFF3CD;
 	border-radius: 15px;
 	margin-top: 20px;
 	margin-bottom: 20px;
