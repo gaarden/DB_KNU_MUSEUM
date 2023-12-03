@@ -67,7 +67,7 @@
 	pstmt.setString(2, GAppDate);
 	pstmt.setInt(3, Integer.parseInt(GAppTime));
 	pstmt.setInt(4, Integer.parseInt(ApplyNum));
-	pstmt.setInt(5, 0); // Status = 0
+	pstmt.setInt(5, 2); // Status 0: 반려, Status 1: 승인, Status 2: 대기
 	pstmt.setString(6, CuserID);
 	pstmt.setString(7, CadminID);
 
