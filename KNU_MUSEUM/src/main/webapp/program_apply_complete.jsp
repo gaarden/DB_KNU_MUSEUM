@@ -80,7 +80,7 @@
 	pstmt2.setInt(2, Integer.parseInt(ApplyNum));
 	pstmt2.setString(3, MAppDate);
 	pstmt2.setInt(4, Integer.parseInt(MAppTimeS));
-	pstmt2.setInt(5, 0); // Status = 0
+	pstmt2.setInt(5, 2); // Status 0: 반려, Status 1: 승인, Status 2: 대기
 	pstmt2.setString(6, CeduID);
 	pstmt2.setString(7, CuserID);
 	pstmt2.setString(8, CadminID);
