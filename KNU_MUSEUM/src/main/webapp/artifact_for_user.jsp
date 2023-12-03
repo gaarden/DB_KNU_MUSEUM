@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <title>KNU_MUSEUM</title>
-<link rel="stylesheet" type="text/css" href="css/artifact.css">
+<link rel="stylesheet" type="text/css" href="css/artifact.css?ver=1.1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -45,7 +45,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="info_for_user.html">이용안내</a></li>
+						aria-current="page" href="info_for_user.jsp">이용안내</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="artifact_for_user.jsp">소장유물</a></li>
 					<li class="nav-item"><a class="nav-link active"

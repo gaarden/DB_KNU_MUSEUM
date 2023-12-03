@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>KNU_MUSEUM</title>
-<link rel="stylesheet" type="text/css" href="css/program.css">
+<link rel="stylesheet" type="text/css" href="css/program.css?ver=1.2">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
