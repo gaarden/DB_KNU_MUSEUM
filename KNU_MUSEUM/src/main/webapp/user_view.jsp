@@ -58,8 +58,9 @@
             </ul>
             <span class="navbar-text">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="user_view.jsp">마이페이지</a>
+                        <li class="nav-item"><a class="nav-link" href="user_view.jsp">My Page</a>
                         </li>
+                        <li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
                     </ul>
                 </span>
         </div>
@@ -90,7 +91,7 @@
             <tr>
                 <td>체험프로그램명</td>
                 <td>날짜</td>
-                <td>소요시간</td>
+                <td>시작시간</td>
                 <td>신청인원</td>
                 <td>상태</td>
                 <td>신청취소</td>
@@ -112,7 +113,7 @@
             <tr>
                 <td><%=rs.getString(1)%></td>
                 <td><%=rs.getString(2)%></td>
-                <td><%=rs.getString(3)%>시간</td>
+                <td><%=rs.getString(3)%>시</td>
                 <td><%=rs.getString(4)%>명</td>
                 <td>
                     <%
@@ -158,7 +159,7 @@
             <thead class="table-warning">
             <tr>
                 <td>날짜</td>
-                <td>소요시간</td>
+                <td>시작시간</td>
                 <td>신청인원</td>
                 <td>상태</td>
                 <td>신청취소</td>
@@ -178,7 +179,7 @@
             %>
             <tr>
                 <td><%=rs.getString(1)%></td>
-                <td><%=rs.getString(2)%>시간</td>
+                <td><%=rs.getString(2)%>시</td>
                 <td><%=rs.getString(3)%>명</td>
                 <td>
                     <%

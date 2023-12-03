@@ -19,8 +19,8 @@
 <body>
 	<%
 	String serverIP = "localhost";
-	String strSID = "xe";
-	//String strSID = "orcl";
+	//String strSID = "xe";
+	String strSID = "orcl";
 	String portNum = "1521";
 	String user = "KNU_MUSEUM";
 	String pass = "comp322";
@@ -124,6 +124,7 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link" href="user_view.jsp">My
 								Page</a></li>
+						<li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
 					</ul>
 				</span>
 			</div>
@@ -150,7 +151,8 @@
 				</tr>
 			</tbody>
 		</table>
-
+		<a href="user_view.jsp"><h4 style="margin-bottom: 20px;">
+				신청내역 확인하기</h4></a>
 	</div>
 
 

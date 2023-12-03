@@ -59,14 +59,16 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link" href="user_view.jsp">My
 								Page</a></li>
+						<li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
 					</ul>
 				</span>
 			</div>
 		</div>
 	</nav>
 
+
 	<div class="artifact">
-		<form action="artifact.jsp" method="Post">
+		<form action="artifact_for_user.jsp" method="Post">
 			<h3>조건 검색</h3>
 			<h4>전시실 선택</h4>
 			<select name="location">
@@ -99,6 +101,9 @@
 		String query;
 		request.setCharacterEncoding("utf-8");
 
+		String Era = request.getParameter("era");
+		String Location = request.getParameter("location");
+
 		if ("0".equals(request.getParameter("location")) | request.getParameter("location") == null) {
 			if ("0".equals(request.getParameter("era")) | request.getParameter("era") == null) {
 				query = "select * from artifact A left join description D on A.ArtifactID = D.HartifactID order by ArtifactID";
@@ -106,51 +111,73 @@
 				rs = pstmt.executeQuery();
 				out.println("<h3>박물관 내 모든 유물을 조회하였습니다.</h3>");
 			} else {
-				query = "select * from artifact A left join description D on A.ArtifactID = D.HartifactID where era = " + "'"
+				query = "select * from artifact A left join description D on A.ArtifactID = D.HartifactID where Era = " + "'"
 				+ request.getParameter("era") + "' order by ArtifactID";
 				pstmt = conn.prepareStatement(query);
 				rs = pstmt.executeQuery();
-				out.println("<h3>박물관 내 유물 중 시대가 " + request.getParameter("era") + "인 유물을 조회했습니다.</h3>");
+				out.println("<h3>박물관 내 유물 중 시대가 " + Era + "인 유물을 조회했습니다.</h3>");
 			}
 		} else {
 			if ("0".equals(request.getParameter("era")) | request.getParameter("era") == null) {
-				query = "select * from artifact A left join description D on A.ArtifactID = D.HartifactID where location = "
+				query = "select * from artifact A left join description D on A.ArtifactID = D.HartifactID where Location = "
 				+ "'" + request.getParameter("location") + "' order by ArtifactID";
 				pstmt = conn.prepareStatement(query);
 				rs = pstmt.executeQuery();
-				out.println("<h3>박물관 내 유물 중 위치가 " + request.getParameter("location") + "인 유물을 조회했습니다.</h3>");
+				out.println("<h3>박물관 내 유물 중 위치가 " + Location + "인 유물을 조회했습니다.</h3>");
 			} else {
-				query = "select * from artifact A left join description D on A.ArtifactID = D.HartifactID where location = "
-				+ "'" + request.getParameter("location") + "' and " + "era = " + "'" + request.getParameter("era")
-				+ "' order by ArtifactID";
+				query = "select * from artifact A left join description D on A.ArtifactID = D.HartifactID where Location = "
+				+ "'" + request.getParameter("location") + "' and " + "Era = " + "'" + Era + "' order by ArtifactID";
 				pstmt = conn.prepareStatement(query);
 				rs = pstmt.executeQuery();
-				out.println("<h3>박물관 내 유물 중 위치가 " + request.getParameter("location") + "이고, 시대가 " + request.getParameter("era")
-				+ "인 유물을 조회했습니다.</h3>");
+				out.println("<h3>박물관 내 유물 중 위치가 " + Location + "이고, 시대가 " + Era + "인 유물을 조회했습니다.</h3>");
 			}
 		}
 
 		ResultSetMetaData rsmd = rs.getMetaData();
 		int cnt = rsmd.getColumnCount();
 
-		while (rs.next()) {
-			out.println("<div class=\"element\">");
-			out.println("<br>");
-			out.println("<h4>" + rs.getString(2) + "</h4>");
-			out.println("<p style=\"margin: 20px;\">유물 설명: " + rs.getString(11) + "</p>");
-			out.println("<img src=\"Artifact_image/" + rs.getString(3)
-			+ ".png\" style=\"width:300px; margin-top:20px; margin-bottom:20px;\">");
-			out.println("<p>* 유물 위치: " + request.getParameter("location") + "</p>");
-			out.println("<p>* 유물 시대: " + request.getParameter("era") + "</p>");
-			out.println("<br>");
-			out.println("</div>");
+		if (!rs.next()) {
+			out.println("<h3> 해당하는 유물 정보가 없습니다. <h3>");
+		} else {
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+
+				out.println("<div class=\"element\">");
+				out.println("<br>");
+				out.println("<h4>" + rs.getString(2) + "</h4>");
+
+				out.println("<div class=\"container text-center\">");
+				out.println("<div class =\"row\"> ");
+				out.println("<div class =\"col\"> ");
+
+				out.println("<img src=\"Artifact_image/" + rs.getString(3)
+				+ ".png\" style=\" height:300px; margin-top:10px; margin-bottom:10px;\">");
+
+				out.println("</div>");
+
+				out.println("<div class = \"col\"> ");
+				out.println("<p style=\"margin: 20px;\">설명: " + rs.getString(11) + "</p>");
+
+				out.println("<audio controls>");
+				out.println("<source src=\"Description_audio/" + rs.getString(10) + ".mp3 \" type=\"audio/mp3\">");
+				out.println("</audio>");
+
+				out.println("<p>* 위치: " + rs.getString(4) + "</p>");
+				out.println("<p>* 시대: " + rs.getString(6) + "</p>");
+
+				out.println("</div>");
+				out.println("</div>");
+				out.println("<br>");
+				out.println("</div>");
+				out.println("</div>");
+			}
 		}
 
 		rs.close();
 		pstmt.close();
 		%>
 	</div>
-
 
 </body>
 </html>

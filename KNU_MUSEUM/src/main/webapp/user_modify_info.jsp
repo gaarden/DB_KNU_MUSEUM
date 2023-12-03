@@ -37,29 +37,33 @@
 	%>
 
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="main.html"> <img
-				src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24"
-				class="d-inline-block align-text-top">
-			</a>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="info.html">이용안내</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="artifact.jsp">소장유물</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">체험프로그램</a></li>
-				</ul>
-				<span class="navbar-text">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
-					</ul>
-				</span>
-			</div>
-		</div>
-	</nav>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"> <img
+                    src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24"
+                    class="d-inline-block align-text-top">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active"
+                                         aria-current="page" href="info_for_user.jsp">이용안내</a></li>
+                <li class="nav-item"><a class="nav-link active"
+                                         aria-current="page" href="artifact_for_user.jsp">소장유물</a></li>
+                <li class="nav-item"><a class="nav-link active"
+                                         aria-current="page" href="program_for_user.jsp">체험프로그램</a></li>
+                <li class="nav-item"><a class="nav-link active"
+                                         aria-current="page" href="program_apply.jsp">체험 프로그램 신청</a></li>
+                <li class="nav-item"><a class="nav-link active"
+                                         aria-current="page" href="group_apply.jsp">단체관람 신청</a></li>
+            </ul>
+            <span class="navbar-text">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">                        <li class="nav-item"><a class="nav-link" href="user_view.jsp">My Page</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
+                    </ul>
+                </span>
+        </div>
+    </div>
+</nav>
 	<ul class="nav nav-underline justify-content-center">
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="user_view.jsp">신청내역조회</a>
@@ -77,7 +81,7 @@
 
 <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">@</span>
-  <input type="text" class="form-control"  name="password" placeholder="비밀번호" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <input type="password" class="form-control"  name="password" placeholder="비밀번호" aria-label="Recipient's username" aria-describedby="basic-addon2">
 </div>
 
 <div class="input-group mb-3">
@@ -87,12 +91,12 @@
 
 <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">@</span>
-  <input type="text" class="form-control" name="email" placeholder="이메일" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <input type="email" class="form-control" name="email" placeholder="이메일" aria-label="Recipient's username" aria-describedby="basic-addon2">
 </div>
 
 <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">@</span>
-  <input type="text" class="form-control" name="PNumber" placeholder="전화번호" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <input type="tel" class="form-control" name="PNumber" placeholder="전화번호" aria-label="Recipient's username" aria-describedby="basic-addon2">
 </div>
 <button type="submit" class="btn btn-secondary">제출</button>
 </form>
