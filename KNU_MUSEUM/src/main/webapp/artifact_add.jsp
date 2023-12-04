@@ -151,7 +151,7 @@
 		String maxArtifactIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(ArtifactID, 2))) AS MaxArtifactID FROM ARTIFACT";
 		ResultSet maxArtifactIDResultSet = stmt.executeQuery(maxArtifactIDQuery);
 		maxArtifactIDResultSet.next();
-		int maxArtifactIDNumber = maxArtifactIDResultSet.getInt("MaxArtifactID");
+		int maxArtifactIDNumber = maxArtifactIDResultSet.getInt(1);
 		int newArtifactIDNumber = maxArtifactIDNumber + 1;
 		String newArtifactID = "A" + newArtifactIDNumber;
 		maxArtifactIDResultSet.close();

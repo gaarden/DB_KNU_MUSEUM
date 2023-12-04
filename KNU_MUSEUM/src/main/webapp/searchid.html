@@ -43,23 +43,23 @@
 		</div>
 	</nav>
 
-
+	<br>
 	<div class="form-container">
 		<form class="row g-3" action="searchid.jsp" method="post">
 			<h2 class="text-center mb-4">아이디 찾기</h2>
 			<div class="col-12">
-				<input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력해 주세요">
+				<input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력해 주세요" required>
 			</div>
 
 			<div class="col-12">
-				<input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력해 주세요">
+				<input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력해 주세요" required>
 			</div>
 			<div class="col-12">
 				<input type="text" class="form-control" id="phonenumber" name="phoneNumber"
-					placeholder="휴대폰 번호를 '-'없이 입력해주세요.">
+					placeholder="휴대폰 번호를 '-'없이 입력해주세요." required>
 			</div>
 			<div class="d-grid gap-2 col-6 mx-auto">
-				<button class="btn btn-primary" type="submit">아이디 찾기</button>
+				<button class="btn btn-secondary" type="submit">아이디 찾기</button>
 			</div>
 		</form>
 
