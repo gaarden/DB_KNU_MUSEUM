@@ -105,7 +105,7 @@
 	
 	<div class="box">
 		<h2 style="margin-bottom: 20px;">신청이 취소되었습니다.</h2>
-		<a href="user_view.jsp"><h4>My Page로 돌아가기 </h4></a>
+		<a href="user_view.jsp" style="color:#6C757D"><h4>My Page로 돌아가기 </h4></a>
 	</div>
 	
 

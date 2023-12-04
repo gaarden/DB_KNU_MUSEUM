@@ -19,8 +19,8 @@
 <body>
 	<%
 	String serverIP = "localhost";
-	//String strSID = "xe";
-	String strSID = "orcl";
+	String strSID = "xe";
+	//String strSID = "orcl";
 	String portNum = "1521";
 	String user = "KNU_MUSEUM";
 	String pass = "comp322";
@@ -129,13 +129,14 @@
 					id="selectedDate" name="selectedDate" style="margin: 10px; border-color:black"></label></div>
 			<div class="date-container">
 				<label for="selectedDate">시간:</label> 
-				<input  type="radio" name="time" value="9"> 오전 9시  <input
+				<input type="radio" name="time" value="9"> 오전 9시  <input
 					 type="radio" name="time" value="14"> 오후 2시</label></div>
 			
 
 			<div class="date-container">
-				<label for="selectedDate">신청 인원:</label> <input class="btn btn-outline" type="text"
-					name="num" style="width: 100px; border-color:black"> <label for="selectedDate">명</label>
+				<label for="selectedDate">신청 인원:</label> 
+				<input type="text" name="num" style="width: 100px; border-color:black;"> 
+				<label for="selectedDate">명</label>
 			</div>
 
 			<script>

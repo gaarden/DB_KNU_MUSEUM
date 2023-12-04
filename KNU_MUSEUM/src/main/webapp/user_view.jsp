@@ -19,8 +19,8 @@
 
 	<%
 	String serverIP = "localhost";
-	//String strSID = "xe";
-	String strSID = "orcl";
+	String strSID = "xe";
+	//String strSID = "orcl";
 	String portNum = "1521";
 	String user = "KNU_MUSEUM";
 	String pass = "comp322";
@@ -193,9 +193,9 @@
 							<%
 							if (rs.getString(4).equals("2")) {
 								out.println("대기");
-							} else if (rs.getString(5).equals("0")) {
+							} else if (rs.getString(4).equals("0")) {
 								out.println("반려");
-							} else if (rs.getString(5).equals("1")) {
+							} else if (rs.getString(4).equals("1")) {
 								out.println("승인");
 							}
 							%>
