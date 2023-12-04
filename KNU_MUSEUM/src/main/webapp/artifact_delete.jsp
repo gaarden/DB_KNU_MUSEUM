@@ -89,7 +89,6 @@
 		pstmtDeleteArtifact.setString(1, artifactID);
 		int rowsAffected = pstmtDeleteArtifact.executeUpdate();
 		
-		out.println("<div class=\"box\">");
 		// Display a message based on the delete result
 		if (rowsAffected > 0) {
             response.sendRedirect("admin_artifact.jsp");

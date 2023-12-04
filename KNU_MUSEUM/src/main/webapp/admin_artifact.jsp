@@ -103,8 +103,16 @@
 			ResultSet rs;
 			String artifactName = "";
 			artifactName = request.getParameter("artifact_name");
-			query = "Select Artname, Image, Location, Class, Era, MadminID, ArtifactID From Artifact WHERE ARTNAME LIKE '%" + artifactName + "%' order by ArtifactID";
-			pstmt = conn.prepareStatement(query);
+			if (artifactName == null || artifactName.isEmpty()) {
+			    // If artifactName is empty or null, retrieve all artifacts
+			    query = "SELECT Artname, Image, Location, Class, Era, MadminID, ArtifactID FROM Artifact ORDER BY ArtifactID";
+			    pstmt = conn.prepareStatement(query);
+			} else {
+			    // If artifactName has a value, use the LIKE condition
+			    query = "SELECT Artname, Image, Location, Class, Era, MadminID, ArtifactID FROM Artifact WHERE ARTNAME LIKE ? ORDER BY ArtifactID";
+			    pstmt = conn.prepareStatement(query);
+			    pstmt.setString(1, "%" + artifactName + "%");
+			}
 			rs = pstmt.executeQuery();
 			out.println("<tbody>");
 			while (rs.next()) {
