@@ -31,11 +31,10 @@
 
 	request.setCharacterEncoding("utf-8");
 
-	
 	String AdminID = (String) session.getAttribute("AdminID");
 	%>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#"> <img
 				src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24"
@@ -56,7 +55,8 @@
 				</ul>
 				<span class="navbar-text">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link" href="#"><%=AdminID%>님이 관리중입니다.</a></li>
+						<li class="nav-item"><a class="nav-link" href="#"><%=AdminID%>님이
+								관리중입니다.</a></li>
 						<li class="nav-item"><a class="nav-link" href="main.html">로그아웃</a></li>
 					</ul>
 				</span>
@@ -71,7 +71,8 @@
 			aria-current="page" href="program_add.jsp">체험 프로그램 추가하기</a></li>
 	</ul>
 	<div class="table-responsive">
-		<p><%=AdminID %>님이 담당하는 체험 프로그램</p>
+		<p><%=AdminID%>님이 담당하는 체험 프로그램
+		</p>
 		<table class="table align-middle">
 			<thead class="table-warning">
 				<tr>
@@ -90,7 +91,8 @@
 			String query = new String();
 			PreparedStatement pstmt;
 			ResultSet rs;
-			query = "Select EduID, Title, TO_CHAR(StartDate, 'yyyy-mm-dd') AS StartDate, TO_CHAR(EndDate, 'yyyy-mm-dd') AS EndDate, PTime, LimitNum, MadminID From MUSEUM_PROGRAM_LIST where MadminID='"+AdminID+"' order by StartDate desc";
+			query = "Select EduID, Title, TO_CHAR(StartDate, 'yyyy-mm-dd') AS StartDate, TO_CHAR(EndDate, 'yyyy-mm-dd') AS EndDate, PTime, LimitNum, MadminID From MUSEUM_PROGRAM_LIST where MadminID='"
+					+ AdminID + "' order by StartDate desc";
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			out.println("<tbody>");
@@ -103,8 +105,10 @@
 				out.println("<td>" + (rs.getString(5) != null ? rs.getString(5) : "") + "</td>");
 				out.println("<td>" + (rs.getString(6) != null ? rs.getString(6) : "") + "</td>");
 				out.println("<td>" + (rs.getString(7) != null ? rs.getString(7) : "") + "</td>");
-				out.println("<td><button onclick='location.href=\"program_edit.jsp?EduID=" + rs.getString(1) + "\"'>편집</button></td>");
-                out.println("<td><button onclick='location.href=\"program_delete.jsp?EduID=" + rs.getString(1) + "\"'>삭제</button></td>");		
+				out.println(
+				"<td><button onclick='location.href=\"program_edit.jsp?EduID=" + rs.getString(1) + "\"'>편집</button></td>");
+				out.println("<td><button onclick='location.href=\"program_delete.jsp?EduID=" + rs.getString(1)
+				+ "\"'>삭제</button></td>");
 				out.println("</tr>");
 			}
 			%>
@@ -127,7 +131,7 @@
 					<td>소요 시간</td>
 					<td>프로그램 정원</td>
 					<td>관리자ID</td>
-				
+
 				</tr>
 			</thead>
 			<%
@@ -158,12 +162,12 @@
 				out.println("<td>" + (rs2.getString(5) != null ? rs2.getString(5) : "") + "</td>");
 				out.println("<td>" + (rs2.getString(6) != null ? rs2.getString(6) : "") + "</td>");
 				out.println("<td>" + (rs2.getString(7) != null ? rs2.getString(7) : "") + "</td>");
-			
+
 				out.println("</tr>");
 			}
 			%>
 		</table>
-		
+
 	</div>
 	
 	
@@ -171,12 +175,12 @@
 	<%
 	rs.close();
 	pstmt.close();
-	
+
 	rs2.close();
 	pstmt2.close();
 	conn.close();
 	%>
-	
+
 
 
 </body>
