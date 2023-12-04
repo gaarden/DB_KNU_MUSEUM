@@ -66,9 +66,9 @@
 	<br>
 	<ul class="nav nav-underline justify-content-center">
 		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="program_manage.jsp">프로그램 목록</a></li>
+			aria-current="page" href="program_manage.jsp">체험 프로그램 조회하기</a></li>
 		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="program_add.jsp">프로그램 추가하기</a></li>
+			aria-current="page" href="program_add.jsp">체험 프로그램 추가하기</a></li>
 	</ul>
 	<div class="info">
 		<form action="program_add.jsp" method="Post" onsubmit="submitForm()">
@@ -137,7 +137,7 @@
 		String maxEduIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(EduID, 4))) AS MaxEduID FROM MUSEUM_PROGRAM_LIST";
 		ResultSet maxEduIDResultSet = stmt.executeQuery(maxEduIDQuery);
 		maxEduIDResultSet.next();
-		int maxEduIDNumber = maxEduIDResultSet.getInt("MaxEduID");
+		int maxEduIDNumber = maxEduIDResultSet.getInt(1);
 		int newEduIDNumber = maxEduIDNumber + 1;
 		String newEduID = "Edu" + newEduIDNumber;
 		maxEduIDResultSet.close();
