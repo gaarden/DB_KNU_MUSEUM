@@ -131,7 +131,7 @@
 
 			<div class="date-container">
 				<label for="selectedDate">신청 인원:</label> <input class="btn btn-outline" type="text"
-					name="num" style="width: 50px; border-color:black"> <label for="selectedDate">명</label>
+					name="num" style="width: 100px; border-color:black"> <label for="selectedDate">명</label>
 			</div>
 
 			<script>

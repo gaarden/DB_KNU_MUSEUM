@@ -61,11 +61,11 @@
 
 			<div class="date-container">
 				<label for="selectedDate">관람 시작 시간:</label> <input class="btn btn-outline" type="number"
-					name="time" style="width: 50px; border-color:black"> <label for="selectedDate">시</label>
+					name="time" style="width: 100px; border-color:black"> <label for="selectedDate">시</label>
 			</div>
 			<div class="date-container">
 				<label for="selectedDate">신청 인원:</label> <input  class="btn btn-outline" type="number"
-					name="num" style="width: 50px; border-color:black"> <label for="selectedDate">명</label>
+					name="num" style="width: 100px; border-color:black"> <label for="selectedDate">명</label>
 			</div>
 
 			<input class="btn" type="submit" value="신청하기"
