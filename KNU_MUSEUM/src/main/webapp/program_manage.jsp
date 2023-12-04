@@ -66,11 +66,10 @@
 	<br>
 	<ul class="nav nav-underline justify-content-center">
 		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="program_manage.jsp">프로그램 목록</a></li>
+			aria-current="page" href="program_manage.jsp">체험 프로그램 조회하기</a></li>
 		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="program_add.jsp">프로그램 추가하기</a></li>
+			aria-current="page" href="program_add.jsp">체험 프로그램 추가하기</a></li>
 	</ul>
-
 	<div class="table-responsive">
 		<p><%=AdminID%>님이 담당하는 체험 프로그램
 		</p>
@@ -116,6 +115,12 @@
 		</table>
 		<br>
 		<p>전체 체험 프로그램 리스트</p>
+		<form class="d-flex" action="program_manage.jsp" method="Post">
+			<input class="form-control me-2" type="search" placeholder="Search"
+				aria-label="Search" name="program_name">
+			<button class="btn btn-secondary" type="submit">Search</button>
+		</form>
+		<br>
 		<table class="table align-middle">
 			<thead class="table-warning">
 				<tr>
@@ -133,8 +138,19 @@
 			String query2 = new String();
 			PreparedStatement pstmt2;
 			ResultSet rs2;
-			query2 = "Select EduID, Title, TO_CHAR(StartDate, 'yyyy-mm-dd') AS StartDate, TO_CHAR(EndDate, 'yyyy-mm-dd') AS EndDate, PTime, LimitNum, MadminID From MUSEUM_PROGRAM_LIST order by StartDate desc";
-			pstmt2 = conn.prepareStatement(query2);
+			String programName = "";
+			programName = request.getParameter("program_name");
+			if (programName == null || programName.isEmpty()) {
+			    // If artifactName is empty or null, retrieve all artifacts
+				query2 = "Select EduID, Title, TO_CHAR(StartDate, 'yyyy-mm-dd') AS StartDate, TO_CHAR(EndDate, 'yyyy-mm-dd') AS EndDate, PTime, LimitNum, MadminID From MUSEUM_PROGRAM_LIST order by StartDate desc";
+				pstmt2 = conn.prepareStatement(query2);
+			} else {
+			    // If artifactName has a value, use the LIKE condition
+			    query2 = "Select EduID, Title, TO_CHAR(StartDate, 'yyyy-mm-dd') AS StartDate, TO_CHAR(EndDate, 'yyyy-mm-dd') AS EndDate, PTime, LimitNum, MadminID From MUSEUM_PROGRAM_LIST WHERE Title LIKE ? order by StartDate desc";
+				pstmt2 = conn.prepareStatement(query2);
+			    pstmt2.setString(1, "%" + programName + "%");
+			}
+			
 			rs2 = pstmt2.executeQuery();
 			out.println("<tbody>");
 			while (rs2.next()) {
@@ -153,6 +169,8 @@
 		</table>
 
 	</div>
+	
+	
 	<br>
 	<%
 	rs.close();
