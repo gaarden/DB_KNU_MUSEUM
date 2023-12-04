@@ -137,7 +137,7 @@
 		String maxEduIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(EduID, 4))) AS MaxEduID FROM MUSEUM_PROGRAM_LIST";
 		ResultSet maxEduIDResultSet = stmt.executeQuery(maxEduIDQuery);
 		maxEduIDResultSet.next();
-		int maxEduIDNumber = maxEduIDResultSet.getInt("MaxEduID");
+		int maxEduIDNumber = maxEduIDResultSet.getInt(1);
 		int newEduIDNumber = maxEduIDNumber + 1;
 		String newEduID = "Edu" + newEduIDNumber;
 		maxEduIDResultSet.close();
