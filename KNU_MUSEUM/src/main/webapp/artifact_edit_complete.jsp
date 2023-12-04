@@ -69,6 +69,8 @@
 	PreparedStatement updateArtifact = conn.prepareStatement(sql);
 
 	try {
+		conn.setAutoCommit(false);
+		
 		if (nArtname != null && !nArtname.isEmpty()) {
 			updateArtifact.setString(1, nArtname);
 			updateArtifact.setString(2, nImage);
@@ -82,6 +84,7 @@
 			int res = updateArtifact.executeUpdate();
 
  			if (res > 0) {
+ 				conn.commit();
 	            response.sendRedirect("admin_artifact.jsp");
 	        } else {
 	            // Handle the case where the update was not successful
@@ -91,8 +94,8 @@
 	} catch (SQLException e) {
 		// Handle SQL exception (print or log the details)
 		e.printStackTrace();
+		conn.rollback();
 	} finally {
-		// Close resources in a finally block
 		try {
 			if (updateArtifact != null) {
 		updateArtifact.close();

@@ -35,6 +35,7 @@
 
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
+	conn.setAutoCommit(false);
 
 	request.setCharacterEncoding("utf-8");
 
@@ -55,12 +56,20 @@
 	        pstmt = conn.prepareStatement(query);
 	        pstmt.setString(1, cancelID);
 	        int res = pstmt.executeUpdate();
-	        // Additional logic if needed based on the result of the update
+	        
+	        if (res > 0) {
+                conn.commit(); // Commit the transaction if the delete operations are successful
+            }
 	    } catch (SQLException e) {
 	        // Handle exceptions if necessary
 	        e.printStackTrace();
+	        conn.rollback();
 	    } finally {
-	        // Close resources (stmt, pstmt, conn) in a try-catch-finally block
+	    	try {
+	            if (pstmt != null) pstmt.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
 	    }
 	}
 	

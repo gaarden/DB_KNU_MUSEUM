@@ -32,12 +32,12 @@
 
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
+	conn.setAutoCommit(false);
 	stmt = conn.createStatement();
 
 	request.setCharacterEncoding("utf-8");
 
 	String UserID = (String) session.getAttribute("UserID");
-
 	String CeduID = request.getParameter("program");
 	String ApplyNum = request.getParameter("num");
 	String MAppDate = request.getParameter("selectedDate");
@@ -49,56 +49,77 @@
 	if (request.getSession().getAttribute("selectedEduID") != null) {
 		CeduID = (String) request.getSession().getAttribute("selectedEduID");
 	}
+	
+	try {
+		conn.setAutoCommit(false);
+		
+		// ApplyID 설정
+		String maxApplyIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(ApplyID, 6))) AS MaxApplyID FROM MUSEUM_PROGRAM_APPLICATION";
+		ResultSet maxApplyIDResultSet = stmt.executeQuery(maxApplyIDQuery);
+		maxApplyIDResultSet.next();
+		int maxApplyIDNumber = maxApplyIDResultSet.getInt(1);
+		int newApplyIDNumber = maxApplyIDNumber + 1;
+		String newApplyID = "apply" + newApplyIDNumber;
+		maxApplyIDResultSet.close();
 
-	// ApplyID 설정
-	String maxApplyIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(ApplyID, 6))) AS MaxApplyID FROM MUSEUM_PROGRAM_APPLICATION";
-	ResultSet maxApplyIDResultSet = stmt.executeQuery(maxApplyIDQuery);
-	maxApplyIDResultSet.next();
-	int maxApplyIDNumber = maxApplyIDResultSet.getInt(1);
-	int newApplyIDNumber = maxApplyIDNumber + 1;
-	String newApplyID = "apply" + newApplyIDNumber;
-	maxApplyIDResultSet.close();
+		// 해당 프로그램에 맞는 CadminID 가져오기
+		String sql2 = "SELECT MadminID FROM MUSEUM_PROGRAM_LIST WHERE EduID = ?";
+		PreparedStatement pstmt3 = conn.prepareStatement(sql2);
+		pstmt3.setString(1, CeduID);
+		ResultSet adminIDResultSet = pstmt3.executeQuery();
+		String CadminID = null;
+		if (adminIDResultSet.next()) {
+			CadminID = adminIDResultSet.getString(1);
+		} else {
+			// Handle the case when no matching EduID is found
+			out.println("No matching EduID found in the museum_program_list table.");
+		}
+		pstmt3.close();
+		adminIDResultSet.close();
+		
 
-	// 해당 프로그램에 맞는 CadminID 가져오기
-	String sql2 = "SELECT MadminID FROM MUSEUM_PROGRAM_LIST WHERE EduID = ?";
-	PreparedStatement pstmt3 = conn.prepareStatement(sql2);
-	pstmt3.setString(1, CeduID);
-	ResultSet adminIDResultSet = pstmt3.executeQuery();
-	String CadminID = null;
-	if (adminIDResultSet.next()) {
-		CadminID = adminIDResultSet.getString(1);
-	} else {
-		// Handle the case when no matching EduID is found
-		out.println("No matching EduID found in the museum_program_list table.");
+		String sql = "INSERT INTO MUSEUM_PROGRAM_APPLICATION (ApplyID, ApplyNum, MAppDate, MAppTime, Status, CeduID, CuserID, CadminID) VALUES (?, ?, TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?, ?, ?)";
+		PreparedStatement pstmt2 = conn.prepareStatement(sql);
+		pstmt2.setString(1, newApplyID);
+		pstmt2.setInt(2, Integer.parseInt(ApplyNum));
+		pstmt2.setString(3, MAppDate);
+		pstmt2.setInt(4, Integer.parseInt(MAppTimeS));
+		pstmt2.setInt(5, 2); // Status 0: 반려, Status 1: 승인, Status 2: 대기
+		pstmt2.setString(6, CeduID);
+		pstmt2.setString(7, CuserID);
+		pstmt2.setString(8, CadminID);
+
+		int res = pstmt2.executeUpdate();
+		pstmt2.close();
+
+		String sql1 = "select title from museum_program_list where eduid = ?";
+		PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+		pstmt1.setString(1, CeduID);
+		ResultSet rs1 = pstmt1.executeQuery();
+		if (rs1.next()) {
+			title = rs1.getString(1);
+		} else {
+			out.println("No matching title found in the museum_program_list table.");
+		}
+		conn.commit();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		conn.rollback();
+	} finally {
+		try {
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (stmt != null) {
+				stmt.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-	pstmt3.close();
-	adminIDResultSet.close();
-
-	String sql = "INSERT INTO MUSEUM_PROGRAM_APPLICATION (ApplyID, ApplyNum, MAppDate, MAppTime, Status, CeduID, CuserID, CadminID) VALUES (?, ?, TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?, ?, ?)";
-	PreparedStatement pstmt2 = conn.prepareStatement(sql);
-	pstmt2.setString(1, newApplyID);
-	pstmt2.setInt(2, Integer.parseInt(ApplyNum));
-	pstmt2.setString(3, MAppDate);
-	pstmt2.setInt(4, Integer.parseInt(MAppTimeS));
-	pstmt2.setInt(5, 2); // Status 0: 반려, Status 1: 승인, Status 2: 대기
-	pstmt2.setString(6, CeduID);
-	pstmt2.setString(7, CuserID);
-	pstmt2.setString(8, CadminID);
-
-	int res = pstmt2.executeUpdate();
-	pstmt2.close();
-
-	String sql1 = "select title from museum_program_list where eduid = ?";
-	PreparedStatement pstmt1 = conn.prepareStatement(sql1);
-	pstmt1.setString(1, CeduID);
-	ResultSet rs1 = pstmt1.executeQuery();
-	if (rs1.next()) {
-		title = rs1.getString(1);
-	} else {
-		out.println("No matching title found in the museum_program_list table.");
-	}
-	pstmt1.close();
-	rs1.close();
 	%>
 
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">

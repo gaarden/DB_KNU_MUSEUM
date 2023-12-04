@@ -72,6 +72,7 @@
 	PreparedStatement pstmt = null;
 
 	try {
+		conn.setAutoCommit(false);
 	    pstmt = conn.prepareStatement(query);
 	    pstmt.setString(1, ApplyID);
 
@@ -80,9 +81,11 @@
 	    out.println("<div class=\"box\">");
 	    if (rowsUpdated > 0) {
 	        out.println("업데이트 성공");
+	        conn.commit();
 	        
 	    } else {
 	        out.println("업데이트된 행이 없음");
+	        conn.rollback();
 	    }
 	    out.println("<a href=\"program_apply_manage.jsp\">관리 페이지로 돌아가기</a>");
 	    out.println("</div>");

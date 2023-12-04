@@ -28,6 +28,7 @@
 	Connection conn = null;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
+	conn.setAutoCommit(false);
 	%>
 
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -85,39 +86,58 @@
 		if (loginState == 1) {
 		%>
 		<p>동일한 아이디가 존재합니다.</p>
-		<div style="text-align:center">
-		<a href="http://localhost:8080/KNU_MUSEUM/join.html" style="color:#6C757D">회원가입</a> 
+		<div style="text-align: center">
+			<a href="http://localhost:8080/KNU_MUSEUM/join.html"
+				style="color: #6C757D">회원가입</a>
 		</div>
 		<%
 		} else {
 
-		// 삽입 쿼리 작성 (실제 데이터베이스 스키마에 맞게 수정 필요)
-		String query = "INSERT INTO USERS VALUES ('" + request.getParameter("id") + "', '" + request.getParameter("password")
-				+ "', '" + request.getParameter("name") + "', '" + request.getParameter("email") + "', '"
-				+ request.getParameter("phoneNumber") + "')";
+		try {
+			conn.setAutoCommit(false); // Disable auto-commit mode
 
-		pstmt = conn.prepareStatement(query);
+			// 삽입 쿼리 작성 (실제 데이터베이스 스키마에 맞게 수정 필요)
+			String query = "INSERT INTO USERS VALUES ('" + request.getParameter("id") + "', '" + request.getParameter("password")
+					+ "', '" + request.getParameter("name") + "', '" + request.getParameter("email") + "', '"
+					+ request.getParameter("phoneNumber") + "')";
 
-		int result = pstmt.executeUpdate();
+			pstmt = conn.prepareStatement(query);
 
-		if (result > 0) {
+			int result = pstmt.executeUpdate();
+
+			if (result > 0) {
 		%>
 
 		<p>회원가입이 성공적으로 완료되었습니다.</p>
-		<div style="text-align:center">
-		<a href="login.html" style="color:#6C757D">로그인 페이지로 이동</a>
+		<div style="text-align: center">
+			<a href="login.html" style="color: #6C757D">로그인 페이지로 이동</a>
 		</div>
 
 		<%
-		} else {
+			} else {
 		%>
 
 		<p>회원가입 중 오류가 발생했습니다.</p>
 
-		<div style="text-align:center">
-		<a href="http://localhost:8080/KNU_MUSEUM/join.html" style="color:#6C757D">회원가입</a> 
+		<div style="text-align: center">
+			<a href="http://localhost:8080/KNU_MUSEUM/join.html"
+				style="color: #6C757D">회원가입</a>
 		</div>
 		<%
+			}
+			conn.commit(); // Commit the transaction if everything is successful
+		} catch (SQLException e) {
+			e.printStackTrace();
+			conn.rollback(); // Rollback the transaction if there's an exception
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		}
@@ -138,6 +158,6 @@
 
 
 	</div>
-	
+
 </body>
 </html>

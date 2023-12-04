@@ -147,21 +147,29 @@
 		PTime = request.getParameter("program_time");
 		LimitNum = request.getParameter("program_limit");
 		MadminID = AdminID;
+		
+		try {
+			conn.setAutoCommit(false);
+			String sql = "INSERT INTO MUSEUM_PROGRAM_LIST (EduID, Title, StartDate, EndDate, PTime, LimitNum, MadminID) VALUES (?, ?, TO_DATE(?, 'YYYY.MM.DD'), TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newEduID);
+			pstmt.setString(2, Title);
+			pstmt.setString(3, StartDate);
+			pstmt.setString(4, EndDate);
+			pstmt.setInt(5, Integer.parseInt(PTime));
+			pstmt.setInt(6, Integer.parseInt(LimitNum));
+			pstmt.setString(7, MadminID);
 
-		String sql = "INSERT INTO MUSEUM_PROGRAM_LIST (EduID, Title, StartDate, EndDate, PTime, LimitNum, MadminID) VALUES (?, ?, TO_DATE(?, 'YYYY.MM.DD'), TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?)";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, newEduID);
-		pstmt.setString(2, Title);
-		pstmt.setString(3, StartDate);
-		pstmt.setString(4, EndDate);
-		pstmt.setInt(5, Integer.parseInt(PTime));
-		pstmt.setInt(6, Integer.parseInt(LimitNum));
-		pstmt.setString(7, MadminID);
-
-		int res = pstmt.executeUpdate();
-
-		pstmt.close();
-		conn.close();
+			int res = pstmt.executeUpdate();
+			conn.commit();
+			
+			pstmt.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+            conn.rollback();
+		}
 
 		response.sendRedirect("program_manage.jsp");
 	}
