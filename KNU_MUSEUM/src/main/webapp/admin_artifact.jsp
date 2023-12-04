@@ -85,6 +85,7 @@
 		<table class="table align-middle">
 			<thead class="table-warning">
 				<tr>
+					<td>유물 ID</td>
 					<td>이름</td>
 					<td>사진</td>
 					<td>위치</td>
@@ -115,6 +116,7 @@
 			out.println("<tbody>");
 			while (rs.next()) {
 				out.println("<tr>");
+				out.println("<td>" + (rs.getString(7) != null ? rs.getString(7) : "") + "</td>");
 				out.println("<td>" + (rs.getString(1) != null ? rs.getString(1) : "") + "</td>");
 				out.println("<td>" + (rs.getString(2) != null ? rs.getString(2) : "") + "</td>");
 				out.println("<td>" + (rs.getString(3) != null ? rs.getString(3) : "") + "</td>");
