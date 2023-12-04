@@ -61,6 +61,12 @@
 		</div>
 	</nav>
 	<br>
+	<ul class="nav nav-underline justify-content-center">
+		<li class="nav-item"><a class="nav-link active"
+			aria-current="page" href="program_manage.jsp">프로그램 목록</a></li>
+		<li class="nav-item"><a class="nav-link active"
+			aria-current="page" href="program_add.jsp">프로그램 추가하기</a></li>
+	</ul>
 	<div class="info">
 		<form action="program_edit_complete.jsp" method="Post">
 			<%

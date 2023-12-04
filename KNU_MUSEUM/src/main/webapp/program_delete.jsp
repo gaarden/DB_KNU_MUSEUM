@@ -29,38 +29,10 @@
 
 </head>
 <body>
-
-	<nav class="navbar navbar-expand-lg bg-body-tertiary">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"> <img
-				src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24"
-				class="d-inline-block align-text-top">
-			</a>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="info.html">이용안내</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="admin_artifact.jsp">유물관리</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">체험프로그램 관리</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">단체프로그램 관리</a></li>
-				</ul>
-				<span class="navbar-text">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link" href="#">관리자페이지</a>
-						</li>
-					</ul>
-				</span>
-			</div>
-		</div>
-	</nav>
-	
 	<%
 	String serverIP = "localhost";
-	String strSID = "xe";
-	//String strSID = "orcl";
+	//String strSID = "xe";
+	String strSID = "orcl";
 	String portNum = "1521";
 	String user = "KNU_MUSEUM";
 	String pass = "comp322";
