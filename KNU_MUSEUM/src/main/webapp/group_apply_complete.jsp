@@ -61,7 +61,7 @@
 	Random random = new Random();
 	CadminID = adminIDList.get(random.nextInt(adminIDList.size()));
 	CadminIDResultSet.close();
-	String sql = "INSERT INTO GROUP_TOUR_APPLICATION (GroupTourID, GAppDate, GAppTime, ApplyNum, Status, CuserID, CadminID) VALUES (?, TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?, ?, ?)";
+	String sql = "INSERT INTO GROUP_TOUR_APPLICATION (GroupTourID, GAppDate, GAppTime, ApplyNum, Status, CuserID, CadminID) VALUES (?, TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?, ?, ?)"; CadminID = "admin168";
 	pstmt = conn.prepareStatement(sql);
 	pstmt.setString(1, newGroupTourID);
 	pstmt.setString(2, GAppDate);
