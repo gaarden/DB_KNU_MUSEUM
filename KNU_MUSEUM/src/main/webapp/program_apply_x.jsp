@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>KNU_MUSEUM</title>
 <link rel="stylesheet" type="text/css" href="css/admin_artifact.css">
-
+<link rel="stylesheet" type="text/css" href="css/program.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -77,7 +77,7 @@
 
 	    // executeUpdate 메서드를 사용하여 업데이트된 행 수를 반환
 	    int rowsUpdated = pstmt.executeUpdate();
-
+	    out.println("<div class=\"box\">");
 	    if (rowsUpdated > 0) {
 	        out.println("업데이트 성공");
 	        
@@ -85,6 +85,7 @@
 	        out.println("업데이트된 행이 없음");
 	    }
 	    out.println("<a href=\"program_apply_manage.jsp\">관리 페이지로 돌아가기</a>");
+	    out.println("</div>");
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	} finally {

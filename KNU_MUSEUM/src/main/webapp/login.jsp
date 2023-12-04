@@ -116,11 +116,9 @@
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	} else {
-		out.println("라디오 버튼을 선택하지 않았습니다.");
 	}
 	%>
-
+	<br>
 	<div class="form-container">
 		<%
 		if (loginState == 1 ) {
@@ -152,12 +150,16 @@
 		<%
 		} else {
 		%>
-		<p>로그인에 실패. 아이디 또는 비밀번호를 확인해주세요.</p>
+		<p>로그인에 실패했습니다. 다시 로그인해주세요.</p>
 		<%
 		}
 		%>
-		<a href="join.html">회원가입 </a> | <a href="searchid.html">아이디 찾기</a> | <a
-			href="searchpw.html">비밀번호 찾기</a>
+		<div style="text-align:center">
+			<a href="http://localhost:8080/KNU_MUSEUM/login.html" style="color:#6C757D">로그인</a> | 
+			<a href="http://localhost:8080/KNU_MUSEUM/join.html" style="color:#6C757D">회원가입</a> | 
+			<a href="http://localhost:8080/KNU_MUSEUM/searchid.html" style="color:#6C757D">아이디 찾기</a> | 
+			<a href="http://localhost:8080/KNU_MUSEUM/searchpw.html" style="color:#6C757D">비밀번호 찾기</a>
+		</div>
 	</div>
 
 </body>

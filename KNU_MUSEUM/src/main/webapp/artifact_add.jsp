@@ -65,8 +65,6 @@
 			aria-current="page" href="admin_artifact.jsp">유물 조회하기</a></li>
 		<li class="nav-item"><a class="nav-link active"
 			aria-current="page" href="artifact_add.jsp">유물 추가하기</a></li>
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="artifact_edit.jsp">유물 편집하기</a></li>
 	</ul>
 
 	<div class="info">
@@ -153,7 +151,7 @@
 		String maxArtifactIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(ArtifactID, 2))) AS MaxArtifactID FROM ARTIFACT";
 		ResultSet maxArtifactIDResultSet = stmt.executeQuery(maxArtifactIDQuery);
 		maxArtifactIDResultSet.next();
-		int maxArtifactIDNumber = maxArtifactIDResultSet.getInt("MaxArtifactID");
+		int maxArtifactIDNumber = maxArtifactIDResultSet.getInt(1);
 		int newArtifactIDNumber = maxArtifactIDNumber + 1;
 		String newArtifactID = "A" + newArtifactIDNumber;
 		maxArtifactIDResultSet.close();

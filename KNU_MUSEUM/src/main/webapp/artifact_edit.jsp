@@ -97,12 +97,12 @@
 					// Check if the result set has a row
 					if (rs.next()) {
 				// Retrieve details
-				Artname = rs.getString("Artname");
-				Image = rs.getString("Image");
-				Location = rs.getString("Location");
-				Class = rs.getString("Class");
-				Era = rs.getString("Era");
-				MadminID = rs.getString("MadminID");
+				Artname = rs.getString(1);
+				Image = rs.getString(2);
+				Location = rs.getString(3);
+				Class = rs.getString(4);
+				Era = rs.getString(5);
+				MadminID = rs.getString(6);
 					}
 
 					// Close resources

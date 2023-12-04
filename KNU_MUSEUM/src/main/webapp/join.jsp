@@ -78,15 +78,16 @@
 			loginState = rs.getInt(1);
 		}
 	%>
-
+	<br>
 	<div class="form-container">
 
 		<%
 		if (loginState == 1) {
-			out.println("<script>alter('메시지팝업 테스트');</script>");
 		%>
-
-		<a href="join.html">회원가입 </a>
+		<p>동일한 아이디가 존재합니다.</p>
+		<div style="text-align:center">
+		<a href="http://localhost:8080/KNU_MUSEUM/join.html" style="color:#6C757D">회원가입</a> 
+		</div>
 		<%
 		} else {
 
@@ -103,7 +104,9 @@
 		%>
 
 		<p>회원가입이 성공적으로 완료되었습니다.</p>
-		<a href="login.html">로그인 페이지로 이동</a>
+		<div style="text-align:center">
+		<a href="login.html" style="color:#6C757D">로그인 페이지로 이동</a>
+		</div>
 
 		<%
 		} else {
@@ -111,8 +114,9 @@
 
 		<p>회원가입 중 오류가 발생했습니다.</p>
 
-		<a href="join.html">회원가입 </a> | <a href="searchid.html">아이디 찾기</a> | <a
-			href="searchpw.html">비밀번호 찾기</a>
+		<div style="text-align:center">
+		<a href="http://localhost:8080/KNU_MUSEUM/join.html" style="color:#6C757D">회원가입</a> 
+		</div>
 		<%
 		}
 
