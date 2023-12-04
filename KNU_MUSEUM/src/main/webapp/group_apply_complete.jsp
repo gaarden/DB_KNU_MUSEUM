@@ -124,7 +124,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<br /> <a href="user_view.jsp"><h4>단체관람 신청내역 확인하기</h4></a>
+		<br /> <a href="user_view.jsp" style="color:#626A72"><h4>단체관람 신청내역 확인하기</h4></a>
 	</div>
 
 

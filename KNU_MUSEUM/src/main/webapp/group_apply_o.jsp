@@ -85,7 +85,7 @@
 	    } else {
 	        out.println("업데이트된 행이 없음");
 	    }
-	    out.println("<a href=\"group_apply_manage.jsp\">관리 페이지로 돌아가기</a>");
+	    out.println("<a href=\"group_apply_manage.jsp\" style=\"color:#626A72\">관리 페이지로 돌아가기</a>");
 	    out.println("</div>");
 	} catch (SQLException e) {
 	    e.printStackTrace();
