@@ -72,22 +72,29 @@
 		if (rs.next()) {
 			// User found, display the ID
 	%>
+	<br>
 	<div class="form-container">
 		<p>아이디 찾기 성공!</p>
 		<p>
 			회원님의 아이디는:
 			<%=rs.getString(1)%></p>
-		<a href="login.html">로그인 페이지로 이동</a> | <a href="searchpw.html">비밀번호
-			찾기</a>
+		<div style="text-align:center">
+		<a href="login.html" style="color:#6C757D">로그인 페이지로 이동</a> | <a href="searchpw.html" style="color:#6C757D">비밀번호 찾기</a>
+		</div>
 	</div>
 	<%
 	} else {
 	// User not found
 	%>
+	<br>
 	<div class="form-container">
 		<p>입력한 정보와 일치하는 회원이 없습니다.</p>
-		<br /> <a href="join.html">회원가입 </a> | <a href="searchid.html">아이디
-			찾기</a> | <a href="searchpw.html">비밀번호 찾기</a>
+		<br />
+		<div style="text-align:center">
+		<a href="join.html" style="color:#6C757D">회원가입</a> | 
+		<a href="searchid.html" style="color:#6C757D"> 아이디 찾기</a> |
+		<a href="searchpw.html" style="color:#6C757D"> 비밀번호 찾기</a> 
+		</div> 
 	</div>
 	<%
 	}
