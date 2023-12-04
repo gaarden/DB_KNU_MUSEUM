@@ -90,6 +90,7 @@
 						<td>진행 기간</td>
 						<td>소요 시간</td>
 						<td>제한 인원</td>
+						<td>선택하기</td>
 					</tr>
 				</thead>
 			<%
@@ -102,6 +103,9 @@
 				out.println("<td>" + rs.getString(3) + "~" + rs.getString(4) + "</td>");
 				out.println("<td>" + rs.getString(5) + "시간</td>");
 				out.println("<td>" + rs.getString(6) + "명</td>");
+				out.println("<td><input type=\"radio\" name=\"program\" value=\"" + rs.getString(1) + "\" " + "data-start-date=\""
+						+ rs.getString(3) + "\" data-end-date=\"" + rs.getString(4) + "\"></td>");
+						
 				out.println("</tr>");
 			}
 			rs.close();
@@ -125,8 +129,8 @@
 					id="selectedDate" name="selectedDate" style="margin: 10px; border-color:black"></label></div>
 			<div class="date-container">
 				<label for="selectedDate">시간:</label> 
-				<input  type="checkbox" name="time" value="9"> 오전 9시  <input
-					 type="checkbox" name="time" value="14"> 오후 2시</label></div>
+				<input  type="radio" name="time" value="9"> 오전 9시  <input
+					 type="radio" name="time" value="14"> 오후 2시</label></div>
 			
 
 			<div class="date-container">
