@@ -204,11 +204,13 @@
 							<%
 							// Compare the application date with the current date
 							if (appDate.isAfter(currentDate)) {
+								if (rs.getString(4).equals("2")) {
 							%>
 							<button name="cancelID" value="<%=rs.getString(5)%>">취소</button>
 						</td>
 					</tr>
 					<%
+					}
 					}
 					} while (rs.next());
 					rs.close();
