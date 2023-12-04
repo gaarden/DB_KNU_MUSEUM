@@ -111,7 +111,7 @@
     <%
         }
     %>
-    <a href="user_view.jsp">신청내역조회로 돌아가기</a>
+    <a href="user_view.jsp" style="color:#626A72">신청내역조회로 돌아가기</a>
 </div>
 
 </body>

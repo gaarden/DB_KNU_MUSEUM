@@ -151,7 +151,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<a href="user_view.jsp"><h4 style="margin-bottom: 20px;">
+		<a href="user_view.jsp" style="color:#626A72"><h4 style="margin-bottom: 20px;">
 				신청내역 확인하기</h4></a>
 	</div>
 
