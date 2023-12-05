@@ -67,7 +67,7 @@
 
 	<div class="table-responsive">
 		
-			<p><%=AdminID%>님이 담당하는 체험 프로그램 신청서
+			<p><%=AdminID%>님이 담당하는 체험프로그램 신청서
 			</p>
 			<table class="table align-middle">
 				<thead class="table-warning">
@@ -88,8 +88,7 @@
 				String query = new String();
 				PreparedStatement pstmt;
 				ResultSet rs;
-				query = "Select A.ApplyID, A.CeduID, L.Title, A.CuserID, TO_CHAR(A.MAppDate, 'yyyy-mm-dd') AS AppDate, A.MAppTime, A.ApplyNum, A.CadminID, A.Status From MUSEUM_PROGRAM_APPLICATION A LEFT JOIN MUSEUM_PROGRAM_LIST L ON L.EduID= A.CeduID where  A.CadminID='"
-						+ AdminID + "' order by AppDate desc";
+				query = "Select A.ApplyID, A.CeduID, L.Title, A.CuserID, TO_CHAR(A.MAppDate, 'yyyy-mm-dd') AS AppDate, A.MAppTime, A.ApplyNum, A.CadminID, A.Status From MUSEUM_PROGRAM_APPLICATION A LEFT JOIN MUSEUM_PROGRAM_LIST L ON L.EduID= A.CeduID order by AppDate desc";
 				pstmt = conn.prepareStatement(query);
 				rs = pstmt.executeQuery();
 				out.println("<tbody>");
@@ -147,7 +146,7 @@
 				String query2 = new String();
 				PreparedStatement pstmt2;
 				ResultSet rs2;
-				query2 = "Select A.ApplyID, A.CeduID, L.Title, A.CuserID, TO_CHAR(A.MAppDate, 'yyyy-mm-dd') AS AppDate, A.MAppTime, A.ApplyNum, A.CadminID, A.Status From MUSEUM_PROGRAM_APPLICATION A LEFT JOIN MUSEUM_PROGRAM_LIST L ON L.EduID= A.CeduID Where A.Status IN ('0', '1','2') order by AppDate desc";
+				query2 = "Select A.ApplyID, A.CeduID, L.Title, A.CuserID, TO_CHAR(A.MAppDate, 'yyyy-mm-dd') AS AppDate, A.MAppTime, A.ApplyNum, A.CadminID, A.Status From MUSEUM_PROGRAM_APPLICATION A LEFT JOIN MUSEUM_PROGRAM_LIST L ON L.EduID= A.CeduID Where A.Status IN ('0', '1') order by AppDate desc";
 				pstmt2 = conn.prepareStatement(query2);
 				rs2 = pstmt2.executeQuery();
 
