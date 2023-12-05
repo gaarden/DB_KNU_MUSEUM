@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>KNU_MUSEUM</title>
-<link rel="stylesheet" type="text/css" href="css/program.css">
-<link rel="stylesheet" type="text/css" href="css/admin_artifact.css">
+
+<link rel="stylesheet" type="text/css" href="css/program_apply.css">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
@@ -33,7 +33,6 @@
 	conn.setAutoCommit(false);
 
 	request.setCharacterEncoding("utf-8");
-	
 
 	PreparedStatement pstmt = null;
 	ResultSet rs;
@@ -71,56 +70,12 @@
 		</div>
 	</nav>
 
+	<div class="box">
+		<h2 style="margin-bottom: 20px;">신청자가 단체관람을 취소하여 승인에 실패했습니다.</h2>
+		<a href="group_apply_manage.jsp" style="color: #626A72"><h4
+				style="margin-bottom: 20px;">관리 페이지로 가기</h4></a>
+	</div>
 
-	<% 
-        String GroupTourID = request.getParameter("GroupTourID");
-     
-	try{
-		conn.setAutoCommit(false);
-		
-		String query = "UPDATE GROUP_TOUR_APPLICATION SET Status = '0' WHERE GroupTourID = ?";
-		  pstmt = conn.prepareStatement(query);
-		    pstmt.setString(1, GroupTourID);
-
-		    // executeUpdate 메서드를 사용하여 업데이트된 행 수를 반환
-		    int rowsUpdated = pstmt.executeUpdate();
-
-		    
-		    if(rowsUpdated==0){
-		    	response.sendRedirect("group_manage_fail.jsp");
-		    	
-		    	
-		    	
-		    }else{
-		    	out.println("<div class=\"box\">");
-			    if (rowsUpdated > 0) {
-			        out.println("업데이트 성공");
-			    } else {
-			        out.println("업데이트된 행이 없음");
-			    }
-			    out.println("<a href=\"group_apply_manage.jsp\" style=\"color:#626A72\">관리 페이지로 돌아가기</a>");
-			    out.println("</div>");
-			    conn.commit();
-		    	
-		    	
-		    }
-
-	    
-	} catch (SQLException e) {
-	    e.printStackTrace();
-	    conn.rollback();
-	} finally {
-	    // 리소스 해제
-	    try {
-	        if (pstmt != null) {
-	            pstmt.close();
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	}
-	
-    %>
 
 </body>
 </html>
