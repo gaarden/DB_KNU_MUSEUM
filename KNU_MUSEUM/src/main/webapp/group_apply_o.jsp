@@ -33,11 +33,15 @@
 	conn.setAutoCommit(false);
 
 	request.setCharacterEncoding("utf-8");
+	
+	PreparedStatement pstmt = null;
+	ResultSet rs;
+	Statement stmt = null;
 
 	String AdminID = (String) session.getAttribute("AdminID");
 	%>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#"> <img
 				src="img/knu_museum_logo.jpg" alt="Logo" width="30" height="24"
@@ -65,31 +69,42 @@
 			</div>
 		</div>
 	</nav>
-	
-	
+
+
 	<% 
+	
+	
+	
         String GroupTourID = request.getParameter("GroupTourID");
      
-	String query = "UPDATE GROUP_TOUR_APPLICATION SET Status = '1' WHERE GroupTourID = ?";
-	PreparedStatement pstmt = null;
-
-	try {
-	    pstmt = conn.prepareStatement(query);
+	
+	try{
+		conn.setAutoCommit(false);
+		String query = "UPDATE GROUP_TOUR_APPLICATION SET Status = '1' WHERE GroupTourID = ?";
+		
+		pstmt = conn.prepareStatement(query);
 	    pstmt.setString(1, GroupTourID);
-
-	    // executeUpdate 메서드를 사용하여 업데이트된 행 수를 반환
 	    int rowsUpdated = pstmt.executeUpdate();
-
-	    out.println("<div class=\"box\">");
-	    if (rowsUpdated > 0) {
-	        out.println("업데이트 성공");
-	    } else {
-	        out.println("업데이트된 행이 없음");
+	    
+	    if (rowsUpdated==0){
+	    	
+	    	// The program does not exist, redirect to program_apply.jsp
+	    				response.sendRedirect("group_manage_fail.jsp");
+	    	
+	    }else{
+	    	
+	    	out.println("<div class=\"box\">");
+		    if (rowsUpdated > 0) {
+		        out.println("업데이트 성공");
+		    } else {
+		        out.println("업데이트된 행이 없음");
+		    }
+		    out.println("<a href=\"group_apply_manage.jsp\" style=\"color:#626A72\">관리 페이지로 돌아가기</a>");
+		    out.println("</div>");
+		   	conn.commit();
+	    	
 	    }
-	    out.println("<a href=\"group_apply_manage.jsp\" style=\"color:#626A72\">관리 페이지로 돌아가기</a>");
-	    out.println("</div>");
-	   	conn.commit();
-	} catch (SQLException e) {
+	}catch (SQLException e) {
 	    e.printStackTrace();
 	    conn.rollback();
 	} finally {

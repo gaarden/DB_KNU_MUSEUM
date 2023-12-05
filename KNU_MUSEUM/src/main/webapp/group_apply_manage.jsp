@@ -68,7 +68,7 @@
 	
 	<div class="table-responsive">
 		
-			<p><%=AdminID%>님이 담당하는 단체관람 신청서
+			<p>대기중인 단체관람 신청서
 			</p>
 			<table class="table align-middle">
 				<thead class="table-warning">
@@ -87,8 +87,7 @@
 				String query = new String();
 				PreparedStatement pstmt;
 				ResultSet rs;
-				query = "Select A.GroupTourID, A.CuserID, TO_CHAR(A.GAppDate, 'yyyy-mm-dd') AS AppDate, A.GAppTime, A.ApplyNum, A.CadminID ,Status From GROUP_TOUR_APPLICATION A where  A.CadminID='"
-						+ AdminID + "' order by AppDate desc";
+				query = "Select A.GroupTourID, A.CuserID, TO_CHAR(A.GAppDate, 'yyyy-mm-dd') AS AppDate, A.GAppTime, A.ApplyNum, A.CadminID ,Status From GROUP_TOUR_APPLICATION A order by AppDate desc";
 						
 				pstmt = conn.prepareStatement(query);
 				rs = pstmt.executeQuery();
@@ -143,7 +142,7 @@
 				String query2 = new String();
 				PreparedStatement pstmt2;
 				ResultSet rs2;
-				query2 = "Select A.GroupTourID, A.CuserID, TO_CHAR(A.GAppDate, 'yyyy-mm-dd') AS AppDate, A.GAppTime, A.ApplyNum, A.CadminID, Status From GROUP_TOUR_APPLICATION A Where A.Status IN ('0', '1','2') order by AppDate desc";
+				query2 = "Select A.GroupTourID, A.CuserID, TO_CHAR(A.GAppDate, 'yyyy-mm-dd') AS AppDate, A.GAppTime, A.ApplyNum, A.CadminID, Status From GROUP_TOUR_APPLICATION A Where A.Status IN ('0', '1') order by AppDate desc";
 						
 						//Select A.ApplyID, A.CeduID, L.Title, A.CuserID, TO_CHAR(A.MAppDate, 'yyyy-mm-dd') AS AppDate, A.MAppTime, A.ApplyNum, A.CadminID, A.Status From MUSEUM_PROGRAM_APPLICATION A LEFT JOIN MUSEUM_PROGRAM_LIST L ON L.EduID= A.CeduID Where A.Status IN ('0', '1','2') order by AppDate desc";
 				pstmt2 = conn.prepareStatement(query2);
