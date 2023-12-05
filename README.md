@@ -1,6 +1,6 @@
 # 🏛 D B _ K N U _ M U S E U M 🏛
 
-<a href="[https://www.notion.so/DB-49677782e78f4a22b9fb1bc096f72ed4](https://www.notion.so/DB-49677782e78f4a22b9fb1bc096f72ed4)" target="_blank"><img src="https://img.shields.io/badge/Team Notion-white?style=for-the-badge&logo=notion&logoColor=black"/></a>
+<a href="https://www.notion.so/DB-49677782e78f4a22b9fb1bc096f72ed4](https://www.notion.so/DB-49677782e78f4a22b9fb1bc096f72ed4" target="_blank"><img src="https://img.shields.io/badge/Team Notion-white?style=for-the-badge&logo=notion&logoColor=black"/></a>
 
 경북대학교 박물관 홈페이지에 **가입**하고
 
