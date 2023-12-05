@@ -66,46 +66,54 @@
 	</nav>
 
 
-	<% 
-        String ApplyID = request.getParameter("ApplyID");
-     
-	String query = "UPDATE MUSEUM_PROGRAM_APPLICATION SET Status = '1' WHERE ApplyID = ?";
+	<%
 	PreparedStatement pstmt = null;
 
 	try {
 		conn.setAutoCommit(false);
-	    pstmt = conn.prepareStatement(query);
-	    pstmt.setString(1, ApplyID);
+		String ApplyID = request.getParameter("ApplyID");
+		// Check if the application still exists
+		String applicationCheckQuery = "SELECT COUNT(*) FROM MUSEUM_PROGRAM_APPLICATION WHERE ApplyID = ?";
+		PreparedStatement applicationCheckStmt = conn.prepareStatement(applicationCheckQuery);
+		applicationCheckStmt.setString(1, ApplyID);
+		ResultSet applicationCheckResult = applicationCheckStmt.executeQuery();
+		applicationCheckResult.next();
+		int applicationCount = applicationCheckResult.getInt(1);
+		applicationCheckStmt.close();
+		applicationCheckResult.close();
+		if (applicationCount == 0) {
+	response.sendRedirect("program_apply_manage_fail.jsp");
+	} else {
+	String query = "UPDATE MUSEUM_PROGRAM_APPLICATION SET Status = '1' WHERE ApplyID = ?";
+	pstmt = conn.prepareStatement(query);
+	pstmt.setString(1, ApplyID);
 
-	    // executeUpdate 메서드를 사용하여 업데이트된 행 수를 반환
-	    int rowsUpdated = pstmt.executeUpdate();
+	int rowsUpdated = pstmt.executeUpdate();
 
-	    out.println("<div class=\"box\">");
-	    if (rowsUpdated > 0) {
-	        out.println("업데이트 성공");
-	        conn.commit();
-	    } else {
-	        out.println("업데이트된 행이 없음");
-	        conn.rollback();
-	    }
-	    out.println("<a href=\"program_apply_manage.jsp\">관리 페이지로 돌아가기</a>");
-	    out.println("</div>");
-	    
-	} catch (SQLException e) {
-	    e.printStackTrace();
-	} finally {
-	    // 리소스 해제
-	    try {
-	        if (pstmt != null) {
-	            pstmt.close();
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+	out.println("<div class=\"box\">");
+	if (rowsUpdated > 0) {
+		out.println("업데이트 성공");
+		conn.commit();
+	} else {
+		out.println("업데이트된 행이 없음");
+		conn.rollback();
 	}
-	
-    %>
+	out.println("<a href=\"program_apply_manage.jsp\">관리 페이지로 돌아가기</a>");
+	out.println("</div>");
+	}
 
-
+	} catch (SQLException e) {
+	e.printStackTrace();
+	} finally {
+	// 리소스 해제
+	try {
+	if (pstmt != null) {
+		pstmt.close();
+	}
+	} catch (SQLException e) {
+	e.printStackTrace();
+	}
+	}
+	%>
 </body>
 </html>
