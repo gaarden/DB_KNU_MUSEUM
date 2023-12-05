@@ -68,11 +68,24 @@
 	<% 
         String ApplyID = request.getParameter("ApplyID");
      
-	String query = "UPDATE MUSEUM_PROGRAM_APPLICATION SET Status = '0' WHERE ApplyID = ?";
+	
 	PreparedStatement pstmt = null;
 
 	try {
 		conn.setAutoCommit(false);
+		// Check if the application still exists
+		String applicationCheckQuery = "SELECT COUNT(*) FROM MUSEUM_PROGRAM_APPLICATION WHERE ApplyID = ?";
+		PreparedStatement applicationCheckStmt = conn.prepareStatement(applicationCheckQuery);
+		applicationCheckStmt.setString(1, ApplyID);
+		ResultSet applicationCheckResult = applicationCheckStmt.executeQuery();
+		applicationCheckResult.next();
+		int applicationCount = applicationCheckResult.getInt(1);
+		applicationCheckStmt.close();
+		applicationCheckResult.close();
+		if (applicationCount == 0) {
+			response.sendRedirect("program_apply_manage_fail.jsp");
+		} else{
+		String query = "UPDATE MUSEUM_PROGRAM_APPLICATION SET Status = '0' WHERE ApplyID = ?";
 	    pstmt = conn.prepareStatement(query);
 	    pstmt.setString(1, ApplyID);
 
@@ -89,6 +102,7 @@
 	    }
 	    out.println("<a href=\"program_apply_manage.jsp\">관리 페이지로 돌아가기</a>");
 	    out.println("</div>");
+	}
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	} finally {
@@ -101,7 +115,6 @@
 	        e.printStackTrace();
 	    }
 	}
-	
     %>
 
 </body>
