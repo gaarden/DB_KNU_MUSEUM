@@ -30,6 +30,7 @@
 	Connection conn = null;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
+	conn.setAutoCommit(false);
 
 	request.setCharacterEncoding("utf-8");
 
@@ -87,8 +88,10 @@
 	    }
 	    out.println("<a href=\"group_apply_manage.jsp\" style=\"color:#626A72\">관리 페이지로 돌아가기</a>");
 	    out.println("</div>");
+	    conn.commit();
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	    conn.rollback();
 	} finally {
 	    // 리소스 해제
 	    try {

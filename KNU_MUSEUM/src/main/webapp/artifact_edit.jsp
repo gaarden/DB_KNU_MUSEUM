@@ -128,7 +128,7 @@
  				<label for="colFormLabel" class="col-sm-2 col-form-label">유물사진</label>
  				<div class="col-sm-10">
  					<input type="text" class="form-control" id="colFormLabel"
- 						placeholder="유물사진" name="artifact_picture" value="<%=Image%>"
+ 						placeholder="유물사진" name="artifact_picture" value="<%=Image %>"
  						readonly>
  				</div>
  			</div>
@@ -163,7 +163,7 @@
  				<label for="colFormLabel" class="col-sm-2 col-form-label">유물이름</label>
  				<div class="col-sm-10">
  					<input type="text" class="form-control" id="colFormLabel"
- 						placeholder="유물이름" name="nartifact_name">
+ 						placeholder="유물이름" value="<%=Artname%>" name="nartifact_name">
  				</div>
  			</div>
  			<div class="row mb-3">

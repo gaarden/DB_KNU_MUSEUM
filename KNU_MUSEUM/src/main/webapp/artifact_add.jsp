@@ -146,52 +146,61 @@
 	aName = request.getParameter("artifact_name");
 
 	if (aName != null && !aName.isEmpty()) {
+		try {
+			conn.setAutoCommit(false);
+			
+			// ArtifactID 설정
+			String maxArtifactIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(ArtifactID, 2))) AS MaxArtifactID FROM ARTIFACT";
+			ResultSet maxArtifactIDResultSet = stmt.executeQuery(maxArtifactIDQuery);
+			maxArtifactIDResultSet.next();
+			int maxArtifactIDNumber = maxArtifactIDResultSet.getInt(1);
+			int newArtifactIDNumber = maxArtifactIDNumber + 1;
+			String newArtifactID = "A" + newArtifactIDNumber;
+			maxArtifactIDResultSet.close();
 
-		// ArtifactID 설정
-		String maxArtifactIDQuery = "SELECT MAX(TO_NUMBER(SUBSTR(ArtifactID, 2))) AS MaxArtifactID FROM ARTIFACT";
-		ResultSet maxArtifactIDResultSet = stmt.executeQuery(maxArtifactIDQuery);
-		maxArtifactIDResultSet.next();
-		int maxArtifactIDNumber = maxArtifactIDResultSet.getInt(1);
-		int newArtifactIDNumber = maxArtifactIDNumber + 1;
-		String newArtifactID = "A" + newArtifactIDNumber;
-		maxArtifactIDResultSet.close();
+			aName = request.getParameter("artifact_name");
+			String aPicture = request.getParameter("artifact_picture");
+			String aClass = request.getParameter("artifact_class");
+			String aLocation = request.getParameter("artifact_location");
+			String aEra = request.getParameter("artifact_era");
+			String MadminID;
 
-		aName = request.getParameter("artifact_name");
-		String aPicture = request.getParameter("artifact_picture");
-		String aClass = request.getParameter("artifact_class");
-		String aLocation = request.getParameter("artifact_location");
-		String aEra = request.getParameter("artifact_era");
-		String MadminID;
+			if (aLocation == null) {
+				MadminID = "admin662";
+			} else if (aLocation.equals("제2전시실")) {
+				MadminID = "admin168";
+			} else if (aLocation.equals("제3전시실")) {
+				MadminID = "admin239";
+			} else if (aLocation.equals("제4전시실")) {
+				MadminID = "admin131";
+			} else if (aLocation.equals("제5전시실")) {
+				MadminID = "admin870";
+			} else {
+				MadminID = "admin662";
+			}
+			query = "INSERT INTO ARTIFACT (ArtifactID, Artname, Image, Location, Class, Era, MadminID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, newArtifactID);
+			pstmt.setString(2, aName);
+			pstmt.setString(3, aPicture);
+			pstmt.setString(4, aLocation);
+			pstmt.setString(5, aClass);
+			pstmt.setString(6, aEra);
+			pstmt.setString(7, MadminID);
 
-		if (aLocation == null) {
-			MadminID = "admin662";
-		} else if (aLocation.equals("제2전시실")) {
-			MadminID = "admin168";
-		} else if (aLocation.equals("제3전시실")) {
-			MadminID = "admin239";
-		} else if (aLocation.equals("제4전시실")) {
-			MadminID = "admin131";
-		} else if (aLocation.equals("제5전시실")) {
-			MadminID = "admin870";
-		} else {
-			MadminID = "admin662";
-		}
-		query = "INSERT INTO ARTIFACT (ArtifactID, Artname, Image, Location, Class, Era, MadminID) VALUES (?, ?, ?, ?, ?, ?, ?)";
-		pstmt = conn.prepareStatement(query);
-		pstmt.setString(1, newArtifactID);
-		pstmt.setString(2, aName);
-		pstmt.setString(3, aPicture);
-		pstmt.setString(4, aLocation);
-		pstmt.setString(5, aClass);
-		pstmt.setString(6, aEra);
-		pstmt.setString(7, MadminID);
-
-		int res = pstmt.executeUpdate();
-		
-		pstmt.close();
-		conn.close();
-		
-		response.sendRedirect("admin_artifact.jsp");
+			int res = pstmt.executeUpdate();
+			
+			conn.commit();
+			
+			pstmt.close();
+			conn.close();
+			
+			response.sendRedirect("admin_artifact.jsp");
+		} catch (SQLException e) {
+            // Handle exceptions
+            e.printStackTrace();
+            conn.rollback();
+        }
 	}
 	%>
 </body>

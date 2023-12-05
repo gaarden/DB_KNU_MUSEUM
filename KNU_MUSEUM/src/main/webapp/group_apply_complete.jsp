@@ -31,6 +31,7 @@
 	Statement stmt = null;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, user, pass);
+	conn.setAutoCommit(false);
 	stmt = conn.createStatement();
 
 	request.setCharacterEncoding("utf-8");
@@ -61,19 +62,36 @@
 	Random random = new Random();
 	CadminID = adminIDList.get(random.nextInt(adminIDList.size()));
 	CadminIDResultSet.close();
-	String sql = "INSERT INTO GROUP_TOUR_APPLICATION (GroupTourID, GAppDate, GAppTime, ApplyNum, Status, CuserID, CadminID) VALUES (?, TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?, ?, ?)"; CadminID = "admin168";
-	pstmt = conn.prepareStatement(sql);
-	pstmt.setString(1, newGroupTourID);
-	pstmt.setString(2, GAppDate);
-	pstmt.setInt(3, Integer.parseInt(GAppTime));
-	pstmt.setInt(4, Integer.parseInt(ApplyNum));
-	pstmt.setInt(5, 2); // Status 0: 반려, Status 1: 승인, Status 2: 대기
-	pstmt.setString(6, CuserID);
-	pstmt.setString(7, CadminID);
+	
+	try {
+		String sql = "INSERT INTO GROUP_TOUR_APPLICATION (GroupTourID, GAppDate, GAppTime, ApplyNum, Status, CuserID, CadminID) VALUES (?, TO_DATE(?, 'YYYY.MM.DD'), ?, ?, ?, ?, ?)"; CadminID = "admin168";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, newGroupTourID);
+		pstmt.setString(2, GAppDate);
+		pstmt.setInt(3, Integer.parseInt(GAppTime));
+		pstmt.setInt(4, Integer.parseInt(ApplyNum));
+		pstmt.setInt(5, 2); // Status 0: 반려, Status 1: 승인, Status 2: 대기
+		pstmt.setString(6, CuserID);
+		pstmt.setString(7, CadminID);
 
-	int res = pstmt.executeUpdate();
-
-	pstmt.close();
+		int res = pstmt.executeUpdate();
+		
+		if (res > 0) {
+            conn.commit();
+        }
+	} catch (SQLException e) {
+        // Handle exceptions if necessary
+        e.printStackTrace();
+        conn.rollback(); // Rollback the transaction if there's an exception
+    } finally {
+        try {
+            if (pstmt != null)
+                pstmt.close();
+            // Close other resources if needed
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 	%>
 
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">

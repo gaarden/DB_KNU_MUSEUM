@@ -48,6 +48,7 @@
 	try {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		conn = DriverManager.getConnection(url, user, pass);
+		conn.setAutoCommit(false);
 		
 		String deleteAppQuery = "Delete from museum_program_application where ceduID = ?";
 		pstmtDeleteApp = conn.prepareStatement(deleteAppQuery);
@@ -61,12 +62,15 @@
 		
 		if (res > 0) {
             response.sendRedirect("program_manage.jsp");
+            conn.commit();
         } else {
             // Handle the case where the update was not successful
             out.println("Delete failed.");
+            
         }
 	} catch (Exception e) {
 		e.printStackTrace();
+		conn.rollback();
 	} finally {
 		try {
 			if (pstmtDeleteProgram != null)

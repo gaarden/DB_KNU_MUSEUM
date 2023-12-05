@@ -65,7 +65,7 @@
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="group_apply_manage.jsp">단체관람 신청서 관리</a></li>
 				</ul>
-				
+
 			</div>
 		</div>
 	</nav>
@@ -74,6 +74,8 @@
 	try {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		conn = DriverManager.getConnection(url, user, pass);
+
+		conn.setAutoCommit(false);
 
 		// Delete from DESCRIPTION table first
 		String deleteDescQuery = "DELETE FROM DESCRIPTION WHERE HartifactID=?";
@@ -89,6 +91,7 @@
 
 		// Display a message based on the delete result
 		if (rowsAffected > 0) {
+			conn.commit();
 			response.sendRedirect("admin_artifact.jsp");
 		} else {
 			// Handle the case where the update was not successful
@@ -96,7 +99,9 @@
 		}
 	} catch (Exception e) {
 		e.printStackTrace();
+		conn.rollback();
 	} finally {
+		conn.setAutoCommit(true);
 		try {
 			if (pstmtDeleteDesc != null)
 		pstmtDeleteDesc.close();

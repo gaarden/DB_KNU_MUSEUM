@@ -54,6 +54,8 @@
 	PreparedStatement updateMuseumProgram = conn.prepareStatement(sql);
 
 	try {
+		conn.setAutoCommit(false);
+		
 		if (nTitle != null && !nTitle.isEmpty()) {
 
 			updateMuseumProgram.setString(1, nTitle);
@@ -67,15 +69,17 @@
 			int res = updateMuseumProgram.executeUpdate();
 
 			if (res > 0) {
-		response.sendRedirect("program_manage.jsp");
+				conn.commit();
+				response.sendRedirect("program_manage.jsp");
 			} else {
-		// Handle the case where the update was not successful
-		out.println("Update failed.");
+				// Handle the case where the update was not successful
+				out.println("Update failed.");
 			}
 		}
 	} catch (SQLException e) {
 		// Handle SQL exception (print or log the details)
 		e.printStackTrace();
+		conn.rollback();
 	} finally {
 		// Close resources in a finally block
 		try {

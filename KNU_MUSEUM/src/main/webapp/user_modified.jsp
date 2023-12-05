@@ -30,14 +30,13 @@
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-
-	
 	request.setCharacterEncoding("utf-8");
 	int updateResult = 0;
 	
 	try {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         conn = DriverManager.getConnection(url, user, pass);
+        conn.setAutoCommit(false);
 
         String UserID = (String) session.getAttribute("UserID");
         String password = request.getParameter("password");
@@ -50,9 +49,14 @@
    
 
         updateResult = pstmt.executeUpdate();
+        
+        if (updateResult > 0) {
+        	conn.commit();
+        }
 
     } catch (Exception e) {
         e.printStackTrace();
+        conn.rollback();
     } finally {
         if (conn != null) {
             try {
