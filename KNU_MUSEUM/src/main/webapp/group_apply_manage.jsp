@@ -68,7 +68,7 @@
 	
 	<div class="table-responsive">
 		
-			<p>대기중인 단체관람 신청서
+			<p><%=AdminID%>님이 담당하는 단체관람 신청서
 			</p>
 			<table class="table align-middle">
 				<thead class="table-warning">
@@ -87,7 +87,7 @@
 				String query = new String();
 				PreparedStatement pstmt;
 				ResultSet rs;
-				query = "Select A.GroupTourID, A.CuserID, TO_CHAR(A.GAppDate, 'yyyy-mm-dd') AS AppDate, A.GAppTime, A.ApplyNum, A.CadminID ,Status From GROUP_TOUR_APPLICATION A order by AppDate desc";
+				query = "Select A.GroupTourID, A.CuserID, TO_CHAR(A.GAppDate, 'yyyy-mm-dd') AS AppDate, A.GAppTime, A.ApplyNum, A.CadminID ,Status From GROUP_TOUR_APPLICATION A Where A.CadminID='"+AdminID +"' order by AppDate desc";
 						
 				pstmt = conn.prepareStatement(query);
 				rs = pstmt.executeQuery();

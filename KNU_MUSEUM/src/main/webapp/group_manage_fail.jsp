@@ -71,7 +71,7 @@
 	</nav>
 
 	<div class="box">
-		<h2 style="margin-bottom: 20px;">신청자가 단체관람을 취소하여 승인에 실패했습니다.</h2>
+		<h2 style="margin-bottom: 20px;">신청자가 단체관람을 취소하여 처리에 실패했습니다.</h2>
 		<a href="group_apply_manage.jsp" style="color: #626A72"><h4
 				style="margin-bottom: 20px;">관리 페이지로 가기</h4></a>
 	</div>
